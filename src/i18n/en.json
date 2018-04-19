@@ -1,0 +1,10 @@
+{
+  "locale": "en",
+  "Header": {
+    "title": "Welcome to the Marina GUI"
+  },
+  "Navigation": {
+    "dashboard": "Dashboard",
+    "userSettings": "User Settings"
+  }
+}
