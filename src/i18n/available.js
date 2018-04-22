@@ -1,10 +1,3 @@
 const translations = require.context("./", true, /\.json$/);
 
-export default translations.keys()
-  .reduce(
-    (acc, item) => ({
-      ...acc,
-      [item.replace(/\.\/(\w+)\.json$/, "$1")]: true,
-    }),
-    {}
-  )
+export const availableLanguages = translations.keys().map(item => item.replace(/\.\/(\w+)\.json$/, "$1"));

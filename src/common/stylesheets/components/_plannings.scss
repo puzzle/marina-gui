@@ -1,0 +1,480 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+
+$cell-width: 36px;
+$cell-height: 4rem;
+$weekdays: 5;
+$week-width: $cell-width * $weekdays;
+$legend-width: 420px;
+$grey: #ddd;
+$grey-light: #f3f3f3;
+
+$headerbar-height: 40px;
+$menu-height: 50px;
+$submenu-height: 50px;
+$nav-height: $headerbar-height + $menu-height + $submenu-height;
+
+$planning-calendar-days-header-top: 45px;
+
+body.plannings,
+body.order_plannings {
+  height: 100vh;
+  overflow: hidden;
+
+  > main {
+    overflow-y: auto;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  > .ui-selectable-helper {
+    display: none;
+  }
+}
+
+#add_employee_id, #add_work_item_id {
+  flex: 1;
+}
+
+.planning-board {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.planning-board-header {
+  position: sticky;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  max-width: calc(100vw - 45px);
+}
+.planning-board-header.stuck {
+  position: fixed;
+  padding-left: 30px;
+  right: 30px;
+}
+.planning-calendar-inner {
+  border-right: 1px solid $grey-light;
+}
+.planning-calendar-weeks,
+.planning-calendar-days-header {
+  padding-left: $legend-width;
+}
+.planning-calendar-weeks {
+  display: flex;
+  flex: 1;
+  top: 0;
+
+  .csspositionsticky & {
+    position: sticky;
+  }
+  &.stuck {
+    position: fixed;
+  }
+}
+
+body.plannings {
+  .planning-calendar-weeks.stuck {
+    top: $nav-height;
+  }
+  .planning-calendar-days-header.stuck {
+    top: $nav-height + $planning-calendar-days-header-top;
+  }
+}
+
+body.order_plannings {
+  .planning-calendar-weeks.stuck {
+    top: 207px;
+  }
+  .planning-calendar-days-header.stuck {
+    top: 207px + $planning-calendar-days-header-top;
+  }
+}
+
+.planning-calendar-header {
+  position: relative;
+  height: 0;
+  z-index: 10;
+}
+
+.planning-calendar-month {
+  background-color: #eee;
+
+  > .title {
+    text-align: center;
+    border-left: 1px solid $grey;
+  }
+  > .title > .year {
+    color: #666;
+  }
+}
+.planning-calendar-month-weeks {
+  display: flex;
+}
+.planning-calendar-week {
+  display: flex;
+  max-width: $week-width;
+  min-width: $week-width;
+  justify-content: space-between;
+  border-left: 1px solid $grey;
+  background-color: $grey-light;
+
+  &:last-child {
+    border-right: 1px solid $grey;
+  }
+
+  > .planned, > .kw {
+    padding: 0.25rem 0.5rem;
+  }
+}
+.planning-calendar-days-header {
+  cursor: default;
+  top: $planning-calendar-days-header-top;
+
+  .csspositionsticky & {
+    position: sticky;
+  }
+  &.stuck {
+    position: fixed;
+  }
+
+  > .dayheader {
+    border-top: 1px solid $grey;
+    background-color: $grey-light;
+    text-align: center;
+    padding: 2px;
+  }
+}
+.planning-calendar-days,
+.planning-calendar-days-header,
+.planning-calendar-inner > .groupheader,
+.planning-calendar-inner > .actions {
+  display: flex;
+  width: calc(var(--days, 1) * #{$cell-width} + #{$legend-width});
+}
+.planning-calendar {
+  .day, .dayheader {
+    min-width: $cell-width;
+    max-width: $cell-width;
+    border-left: 1px solid $grey-light;
+
+    &:last-child {
+      border-right: 1px solid #000000;
+    }
+  }
+  .day:nth-child(5n+2), .dayheader:nth-child(5n+1) {
+    border-left: 1px solid $grey;
+  }
+}
+.planning-calendar-inner > .groupheader > .legend,
+.planning-calendar-inner > .groupheader > .sticky-wrapper > .legend,
+.planning-calendar-inner > .actions > .buttons,
+.planning-calendar-inner > .actions > .sticky-wrapper > .buttons,
+.planning-calendar-days > .legend,
+.planning-calendar-days > .sticky-wrapper > .legend {
+  left: 0;
+  display: flex;
+  align-items: center;
+  min-width: $legend-width;
+  max-width: $legend-width;
+  width: $legend-width;
+  padding-right: 0.5em;
+  background: #fff;
+  color: black;
+  height: $cell-height;
+  border-bottom: 1px solid $grey-light;
+
+  .csspositionsticky & {
+    position: sticky;
+  }
+  &.stuck {
+    position: fixed;
+    z-index: 1;
+    left: $grid-gutter-width;
+  }
+
+  .sum {
+    margin-left: auto;
+    white-space: nowrap;
+  }
+}
+
+.planning-calendar-days .legend > a,
+.planning-calendar-inner .groupheader-wrapper > .groupheader-title > span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 0.5em;
+}
+.planning-calendar-inner > .groupheader > .sticky-wrapper,
+.planning-calendar-inner > .actions > .sticky-wrapper,
+.planning-calendar-days > .sticky-wrapper {
+  width: $legend-width; // set width since Waypoint.Sticky only sets height
+}
+.planning-calendar-inner > .groupheader,
+.planning-calendar-inner > .actions,
+.planning-calendar-days {
+  height: $cell-height;
+  border-bottom: 1px solid $grey-light;
+
+  > .day {
+    height: $cell-height;
+    line-height: 3.5rem;
+    padding: 3px 0;
+  }
+}
+
+.planning-calendar-inner .groupheader-wrapper {
+  width: 100%;
+  cursor: pointer;
+}
+.planning-calendar-inner .groupheader-wrapper > .groupheader-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.planning-calendar-days,
+.groupheader {
+  > .day {
+    text-align: center;
+    font-weight: lighter !important;
+    color: #dadada;
+    background-size: 18px 18px;
+    background-position: left;
+    background-repeat: repeat;
+    background-clip: content-box;
+  }
+}
+.planning-calendar-days {
+  > .day.-selected, > .day.-definitive, > .day.-provisional {
+    font-weight: normal;
+    + {
+      .-selected, .-definitive, .-provisional {
+        border-left: none;
+      }
+    }
+  }
+  > .day.-selected {
+    position: relative;
+    background-clip: border-box;
+  }
+  > .day.-selected::after {
+    position: absolute;
+    content: '';
+    background: lightblue;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+.groupheader {
+  > .day.has-planning {
+    + .has-planning {
+      border-left: none;
+    }
+  }
+}
+.planning-calendar-inner.editable > .planning-calendar-days {
+  > .day {
+    cursor: pointer;
+
+    &.-selected {
+      cursor: move;
+    }
+  }
+}
+
+.planning-panel {
+  position: absolute;
+  display: none;
+  max-width: 350px;
+  z-index: $zindex-popover;
+
+  .panel-footer {
+    display: flex;
+  }
+}
+.planning-percent-group {
+  width: 8em;
+}
+.planning-repetition-group {
+  width: 9em;
+}
+.planning-definitive-group button:focus {
+  background-color: transparent;
+}
+.planning-delete {
+  margin-right: auto;
+}
+
+.planning-legend {
+  display: inline-block;
+  position: sticky;
+  left: 0;
+}
+.planning-legend.stuck {
+  position: fixed;
+  padding-left: 30px;
+}
+.planning-legend-table {
+  td {
+    padding: 2px;
+  }
+
+  td:empty::before {
+    content: '\a0'
+  }
+
+  td:first-child {
+    min-width: $cell-width;
+    max-width: $cell-width;
+    text-align: center;
+    color: #cacaca;
+    height: 3rem;
+    line-height: 3rem;
+    background-size: 18px 18px;
+    background-position: left;
+    background-repeat: repeat;
+    background-clip: content-box;
+  }
+
+  .day {
+    background-color: #efefef;
+  }
+}
+
+.day.has-planning {
+  background-color: #eee;
+}
+
+.day.-holiday,
+.day.-absence,
+.day.-absence-unpaid {
+  border: none;
+  background-color: #cc2767;
+  background-clip: border-box;
+}
+
+.day.-absence-unpaid {
+  background-color: #cc9557;
+}
+
+.day.-holiday {
+  background-color: #92afcc;
+}
+
+.day.-definitive {
+  $blue: #2b78e4;
+  $gradient: linear-gradient(0deg, $blue, $blue);
+  background-image: $gradient;
+  color: #cde5ea !important;
+
+  &.-absence {
+    background-image: $gradient, linear-gradient(0deg, #cc2767, #cc2767);
+  }
+
+  &.-absence-unpaid {
+    background-image: $gradient, linear-gradient(0deg, #cc9557, #cc9557);
+  }
+
+  &.-holiday {
+    background-image: $gradient, linear-gradient(0deg, #92afcc, #92afcc);
+  }
+
+  @for $i from 1 through 9 {
+    $lightBlue: lighten($blue, (100 - $i * 10) / 4);
+    $gradient: linear-gradient(0deg, $lightBlue, $lightBlue);
+
+    &.-percent-#{$i * 10} {
+      background-image: $gradient;
+
+      &.-absence {
+        background-image: $gradient, linear-gradient(0deg, #cc2767, #cc2767);
+      }
+
+      &.-absence-unpaid {
+        background-image: $gradient, linear-gradient(0deg, #cc9557, #cc9557);
+      }
+
+      &.-holiday {
+        background-image: $gradient, linear-gradient(0deg, #92afcc, #92afcc);
+      }
+    }
+  }
+}
+
+.day.-provisional {
+  $gradient: linear-gradient(-45deg, #9bcbd4 25%, #cde5ea 0, #cde5ea 50%, #9bcbd4 0, #9bcbd4 75%, #cde5ea 0);
+  background-color: transparent;
+  background-image: $gradient;
+  color: #50696e !important;
+
+  &.-absence {
+    background-image: $gradient, linear-gradient(0deg, #cc2767, #cc2767);
+  }
+
+  &.-absence-unpaid {
+    background-image: $gradient, linear-gradient(0deg, #cc9557, #cc9557);
+  }
+
+  &.-holiday {
+    background-image: $gradient, linear-gradient(0deg, #92afcc, #92afcc);
+  }
+}
+
+.day {
+  &.-definitive, &.-provisional {
+    &.-absence, &.-absence-unpaid, &.-holiday {
+      &, &.-selected {
+        background-clip: content-box, border-box;
+      }
+    }
+  }
+}
+
+.over_planned {
+  background-color: #E39797 !important;
+}
+.under_planned {
+  background-color: #ECDBA0 !important;
+}
+.fully_planned {
+  background-color: #B0DAA5 !important;
+}
+
+table.company-planning {
+  width: 100%;
+
+  .head th,
+  .head td {
+    text-align: center;
+    border-bottom: 0;
+  }
+
+  tbody td {
+    text-align: center;
+  }
+
+  tbody td.head {
+    text-align: left;
+  }
+
+  td a {
+    color: #333;
+  }
+
+  td.head a {
+    color: $link-color;
+  }
+}
+
+.planning-company-totals {
+  color: #000;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}

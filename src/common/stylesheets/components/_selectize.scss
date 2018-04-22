@@ -1,0 +1,40 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+  color: inherit;
+}
+
+.form-inline {
+  .selectize-control {
+    min-width: 180px;
+  }
+}
+
+.form-control.selectize-control {
+  height: $input-height-base;
+}
+
+.selectize-option {
+  text-align: left;
+
+  .shortname, .name {
+    display: inline-block;
+    line-height: 25px;
+    vertical-align: middle;
+  }
+  .shortname {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .name {
+  }
+
+  .description {
+    font-size: 11px;
+  }
+}

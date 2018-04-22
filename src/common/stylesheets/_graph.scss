@@ -1,0 +1,78 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+
+table.graph {
+  border-spacing: 0px;
+  float: left;
+  margin-right: 50px;
+
+  .head {
+    height: 0;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  tr {
+    height: 110px;
+  }
+
+  td {
+    vertical-align: bottom;
+    text-align: center;
+    width: 80px;
+    padding: 0pt;
+    border: 1px solid white;
+  }
+
+  td.holiday {
+    background-color: #DDDDDD;
+  }
+
+  div {
+    text-align: center;
+    width: 100%;
+    float: left;
+  }
+
+  img {
+    margin: 0px;
+    border: 0px;
+    width: 100%;
+    float: left;
+  }
+
+  div.dateLabel {
+    background-color: #FFFFFF;
+    height: 25px;
+    text-align: center;
+    font-size: 13px;
+  }
+}
+
+table.legend {
+  border-spacing: 5px;
+  border-collapse: separate;
+}
+
+body.weekly_graph table.legend {
+  border-spacing: 0;
+  margin-left:  20px;
+
+  tr {
+    vertical-align: top;
+  }
+
+  td {
+    text-align: left;
+  }
+
+  img {
+    width: 75px;
+    vertical-align: middle;
+  }
+}

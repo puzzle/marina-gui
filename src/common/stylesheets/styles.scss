@@ -1,0 +1,313 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+@import "./_bootstrap_variables";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "./_mixins";
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  @extend .container-fluid;
+  margin: 0 $grid-gutter-width 40px;
+  padding: 0;
+  flex: 1;
+}
+
+h1.h3 {
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+label.required::after{
+  content: " *"
+}
+
+a.symbol {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+.unindented {
+  margin-left: -$grid-gutter-width;
+  margin-right: -$grid-gutter-width;
+}
+
+.nav-tabs.nav-center > li, .nav-pills.nav-center > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs.nav-center, .nav-pills.nav-center {
+  text-align:center;
+}
+
+.nav-tabs > li > a {
+  color: $gray;
+
+  &:hover {
+    color: $gray-darker;
+  }
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  color: $gray-darker;
+}
+
+th {
+  color: #000;
+  font-weight: 400;
+}
+th.periodHead {
+  text-align:     right;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
+#evaluation td {
+  white-space: nowrap;
+}
+
+.btn + .cancel {
+  margin-left: 10px;
+}
+
+.times_total_sum {
+  font-weight:    bold;
+  /* color: #f4a460; */
+  padding-top:    10px;
+  padding-bottom: 20px;
+  white-space:    nowrap;
+}
+
+.notification {
+  border: 2px solid #C9D8FF;
+  background-color: #f0f0f0;
+  margin: 0;
+  margin-top: -16px;
+  margin-bottom: 10px;
+  padding: 2px;
+}
+
+.notification li {
+  margin-left: 20px;
+}
+
+a.has-tooltip {
+  text-decoration: none;
+}
+
+a.has-tooltip span {
+  display: none;
+}
+
+a.has-tooltip:hover {
+  position: relative;
+}
+
+a.has-tooltip:hover span {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: #ffffdd;
+  color: #333;
+  white-space: nowrap;
+  padding: 1pt;
+  border: 1px solid #ddd;
+  font-weight: normal;
+  float: left;
+  text-align: left;
+}
+
+.calendar {
+  margin-left: 5px;
+}
+
+a[data-toggle] {
+  cursor: pointer;
+}
+
+[data-toggle-visibility] {
+  cursor: zoom-in;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+.align-with-heading {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.truncated {
+  max-width: 400px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#existing .truncated {
+  @media (min-width:1200px) {
+    max-width: 500px;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 800px;
+  }
+}
+
+.list-search {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.disabled {
+  color: $btn-link-disabled-color;
+}
+
+.red {
+  color: $brand-danger;
+}
+
+.green {
+  color: $brand-success;
+}
+
+.orange {
+  color: $brand-warning;
+}
+
+.yellow {
+  color: $brand-info;
+}
+
+.tooltip p {
+  margin-bottom: 0;
+}
+
+a.action {
+  margin-right: 50px;
+}
+
+a.disabled:hover {
+  cursor: default;
+  text-decoration: none;
+  color: $btn-link-disabled-color;
+}
+
+.form-action {
+  @extend .form-control;
+  width: auto;
+  border: 0;
+  box-shadow: none;
+  margin-bottom: 15px;
+}
+
+main > .nav-tabs {
+  margin-bottom: $line-height-computed * 2;
+}
+main > .form-horizontal {
+  margin-top: $line-height-computed * 2;
+}
+
+dd.value {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+footer {
+  clear: both;
+}
+
+[data-row-link] tbody tr:not([data-no-link=true]) td:not(.no-link) {
+  cursor: pointer;
+}
+
+html.turbolinks-progress-bar::before {
+  background-color: $brand-blue-dark !important;
+  height: 2px !important;
+}
+
+
+@media print {
+  main {
+    margin: 0;
+  }
+
+  .root {
+    display: block;
+  }
+
+  // Avoid bootstrap adding links and titles in print view
+  a[href]:after {
+    content: "";
+  }
+  abbr[title]:after {
+    content: "";
+  }
+}
+
+
+
+/* jQuery UI customizations */
+#ui-datepicker-div {
+  // make sure datepicker dialog is visible when used in bootstrap modals
+  z-index: $zindex-modal + 1 !important;
+}
+
+@import "./layout";
+
+@import "./components/_form";
+@import "./components/_invoices";
+@import "./components/_nav_tabs";
+@import "./components/_order_edit_form";
+@import "./components/_plannings";
+@import "./components/_progress";
+@import "./components/_selectize";
+@import "./components/_table";
+
+@import "./_absence";
+@import "./_employees";
+@import "./_evaluator";
+@import "./_graph";
+@import "./_header";
+@import "./_worktimes";
+@import "./_orders";
+@import "./_order_comments";
+@import "./_order_uncertainty";
+@import "./_reports_workload";
+@import "./_reports_revenue";
+@import "./_icons";

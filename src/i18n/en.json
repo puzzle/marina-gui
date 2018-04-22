@@ -1,10 +1,17 @@
 {
-  "locale": "en",
-  "Header": {
+  "app": {
+    "title": "Marina GUI"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, ${firstName} ${lastName}"
+  },
+  "header": {
     "title": "Welcome to the Marina GUI"
   },
-  "Navigation": {
+  "navigation": {
     "dashboard": "Dashboard",
-    "userSettings": "User Settings"
+    "userSettings": "User Settings",
+    "logout": "Logout"
   }
 }

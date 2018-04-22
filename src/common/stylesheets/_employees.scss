@@ -1,0 +1,55 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+
+.master-data-vcard-qrcode {
+  display: block;
+  width: 100px;
+
+  @media (min-width: $screen-md-min) {
+    padding-top: 20px;
+  }
+}
+
+.employee-positions {
+  margin-right: 200px;
+  float: left;
+}
+
+.employee-info {
+  float: left;
+}
+
+.employee-info-primary-value {
+  display: inline-block;
+  margin-bottom: $padding-small-vertical;
+}
+
+.employee-absences {
+  clear: left;
+}
+
+@media print {
+  .employee-positions,
+  .employee-info,
+  .employee-absences {
+    td {
+      font-size: 70%;
+    }
+  }
+
+  .employee-positions {
+    margin-right: 50px;
+  }
+
+  .employee-info {
+    float: right;
+  }
+
+  .employee-absences {
+    float: left;
+    clear: none;
+  }
+}

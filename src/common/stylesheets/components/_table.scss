@@ -1,0 +1,216 @@
+//  Copyright (c) 2006-2017, Puzzle ITC GmbH. This file is part of
+//  PuzzleTime and licensed under the Affero General Public License version 3
+//  or later. See the COPYING file at the top-level directory or at
+//  https://github.com/puzzle/puzzletime.
+
+
+.table {
+  & > thead {
+    border-top: 1px solid $table-border-color;
+    background-color: $gray-lighter;
+
+    th, a {
+      color: $gray;
+    }
+
+    tr > th {
+      border-bottom: 0;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:active, &:hover {
+        color: #000;
+      }
+    }
+  }
+  & > thead > tr > th {
+    border-bottom: 0;
+  }
+  & > thead > tr > th,
+  & > tbody > tr > td,
+  & > tfoot > tr > td {
+    padding: 10px 15px;
+
+    &:first-child {
+      padding-left: $grid-gutter-width;
+    }
+    &:last-child {
+      padding-right: $grid-gutter-width;
+    }
+  }
+
+  /* Generic cell content styles */
+  .title {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  .subtitle {
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .muted {
+    color: $gray;
+  }
+  .large {
+    font-size: 25px;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.table-striped {
+ & > thead {
+   & > tr > th:nth-child(2n) {
+     background-color: #ebebeb;
+   }
+ }
+ & > tbody {
+   // odd rows
+   & > tr:nth-child(2n+1) {
+     & > td {
+       background-color: #ffffff;
+     }
+     & > td:nth-child(2n) {
+       background-color: #fcfcfc;
+     }
+   }
+
+   // even rows
+   & > tr:nth-child(2n) {
+     & > td {
+       background-color: #fcfcfc;
+     }
+     & > td:nth-child(2n) {
+       background-color: #f5f5f5;
+     }
+   }
+ }
+}
+
+.table-stripedbody {
+  @extend .table-striped;
+
+  & > thead > tr > th,
+  & > thead > tr > th:nth-child(2n),
+  & > thead > tr > td,
+  & > thead > tr > td:nth-child(2n) {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.table-hover {
+  & > tbody > tr:hover {
+    background-color: #E9F0F8;
+  }
+
+  &.table-striped > tbody > tr:hover {
+    & > td {
+      background-color: #E9F0F8;
+    }
+    & > td:nth-child(2n) {
+      background-color: #E5ECF4;
+    }
+  }
+}
+
+.table-condensed {
+  & > thead > tr > th,
+  & > tbody > tr > td,
+  & > tfoot > tr > td {
+    padding: $padding-base-vertical;
+
+    &:first-child {
+      padding-left: $padding-base-horizontal;
+    }
+    &:last-child {
+      padding-right: $padding-base-horizontal;
+    }
+  }
+}
+.unindented .table-condensed {
+  & > thead > tr > th,
+  & > tbody > tr > td,
+  & > tfoot > tr > td {
+    &:first-child {
+      padding-left: $grid-gutter-width;
+    }
+    &:last-child {
+      padding-right: $grid-gutter-width;
+    }
+  }
+}
+
+.table.table-inline {
+  width: auto;
+}
+
+.table-column-border-left {
+  border-left: 1px solid $table-border-color;
+}
+
+.table-column-border-right {
+  border-right: 1px solid $table-border-color;
+}
+
+table.table td.action {
+  width: 20px;
+  text-align: center;
+  white-space: nowrap;
+
+  > * {
+    padding-right: 5px;
+    text-decoration: none;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+th.periodHead {
+  text-align: center;
+}
+th.period-subhead {
+  text-align: right;
+}
+th.subhead {
+  font-size: 75%;
+  height: 0;
+
+  .table thead & {
+    color: darken($gray, 15%);
+  }
+
+  &, .table-condensed > thead > tr > & {
+    padding-bottom: 2px;
+    padding-top: 2px;
+  }
+
+  &, .table-striped > thead > tr > &:nth-child(2n) {
+    background-color: $gray-light;
+  }
+}
+
+
+
+// Legacy?
+th {
+  color: #000;
+  font-weight: 400;
+}
+th.nowrap {
+  white-space: nowrap;
+}
+
+table .assoc_employment_roles_employments {
+  padding: 0;
+  margin-bottom: 0;
+
+  li {
+    list-style: none;
+  }
+}

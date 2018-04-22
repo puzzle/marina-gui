@@ -1,33 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import available from './i18n/available';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import {Provider} from 'react-redux';
+import {addTranslationForLanguage, initialize} from 'react-localize-redux';
 
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import {store, registerServiceWorker, App} from './app';
+import {availableLanguages, currentLanguage, loadTranslations} from './i18n'
 
-require('./i18n/index');
+import 'bootstrap/fonts/glyphicons-halflings-regular.eot';
+import './common/stylesheets/styles.css';
 
-const navigatorLanguage = (
-  navigator.language.split('-')[0]
-);
+store.dispatch(initialize(availableLanguages, {defaultLanguage: currentLanguage}));
+availableLanguages.forEach(lang => store.dispatch(addTranslationForLanguage(loadTranslations(lang), lang)));
 
-export let currentLanguage = (
-  available.hasOwnProperty(navigatorLanguage) ? navigatorLanguage : 'en'
-);
-
-export const loadTranslations = (l) => {
-  currentLanguage = l;
-  return require(`./i18n/${ l }.json`);
-};
-
-const translations = loadTranslations(currentLanguage);
 ReactDOM.render(
-  <App translations={translations}/>,
+  <Provider store={store}>
+    <App/>
+  </Provider>,
   document.getElementById('root')
 );
 registerServiceWorker();
-
-
