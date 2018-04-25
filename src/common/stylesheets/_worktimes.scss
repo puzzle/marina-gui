@@ -3,7 +3,6 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/puzzle/puzzletime.
 
-
 $worktimes-weeknav-active-bg: #fff;
 $worktimes-weekcontent-hover-bg: $gray-lighter;
 
@@ -202,7 +201,7 @@ $worktimes-weekcontent-hover-bg: $gray-lighter;
       &.active {
         background-color: $worktimes-weeknav-active-bg;
       }
-   }
+    }
   }
 
   .weeknav-total {

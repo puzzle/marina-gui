@@ -3,7 +3,6 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/puzzle/puzzletime.
 
-
 form {
   .legend {
     text-align: right;
@@ -22,12 +21,14 @@ form {
   }
 }
 
-label.required::after{
+label.required::after {
   content: " *"
 }
 
 .has-clear {
-  input::-ms-clear { display: none; }
+  input::-ms-clear {
+    display: none;
+  }
 
   [data-clear] {
     cursor: pointer;
@@ -41,6 +42,8 @@ label.required::after{
   }
 
   &.has-empty-value {
-    [data-clear] { display: none; }
+    [data-clear] {
+      display: none;
+    }
   }
 }

@@ -8,15 +8,15 @@ export const authenticationService = {
 function getUser() {
   const requestOptions = {
     method: 'GET',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     mode: 'cors',
-    redirect: 'error'
+    redirect: 'error',
   };
 
   return fetch(url('/user'), requestOptions)
     .then(handleResponse)
-    .then(user => {
+    .then((user) => {
       // login successful if there's a username in the response
       if (user && user.username) {
         localStorage.setItem('user', JSON.stringify(user));
@@ -27,7 +27,13 @@ function getUser() {
 }
 
 function redirectToLogin() {
-  window.location.href = url('/sso');
+  redirectTo(url('/sso'));
+}
+
+function redirectTo(newUrl) {
+  if (process.env.NODE_ENV !== 'test') {
+    window.location.replace(newUrl);
+  }
 }
 
 function handleResponse(response) {

@@ -2,7 +2,6 @@
 //  PuzzleTime and licensed under the Affero General Public License version 3
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/puzzle/puzzletime.
-
 @import "./_bootstrap_variables";
 @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "./_mixins";
@@ -29,7 +28,7 @@ p {
   hyphens: auto;
 }
 
-label.required::after{
+label.required::after {
   content: " *"
 }
 
@@ -49,14 +48,14 @@ a.symbol {
 }
 
 .nav-tabs.nav-center > li, .nav-pills.nav-center > li {
-  float:none;
-  display:inline-block;
-  *display:inline; /* ie7 fix */
-  zoom:1; /* hasLayout ie7 trigger */
+  float: none;
+  display: inline-block;
+  *display: inline; /* ie7 fix */
+  zoom: 1; /* hasLayout ie7 trigger */
 }
 
 .nav-tabs.nav-center, .nav-pills.nav-center {
-  text-align:center;
+  text-align: center;
 }
 
 .nav-tabs > li > a {
@@ -66,6 +65,7 @@ a.symbol {
     color: $gray-darker;
   }
 }
+
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover {
   color: $gray-darker;
@@ -75,9 +75,11 @@ th {
   color: #000;
   font-weight: 400;
 }
+
 th.periodHead {
-  text-align:     right;
+  text-align: right;
 }
+
 .nowrap {
   white-space: nowrap;
 }
@@ -91,11 +93,11 @@ th.periodHead {
 }
 
 .times_total_sum {
-  font-weight:    bold;
+  font-weight: bold;
   /* color: #f4a460; */
-  padding-top:    10px;
+  padding-top: 10px;
   padding-bottom: 20px;
-  white-space:    nowrap;
+  white-space: nowrap;
 }
 
 .notification {
@@ -172,7 +174,7 @@ a[data-toggle] {
 }
 
 #existing .truncated {
-  @media (min-width:1200px) {
+  @media (min-width: 1200px) {
     max-width: 500px;
   }
 
@@ -232,6 +234,7 @@ a.disabled:hover {
 main > .nav-tabs {
   margin-bottom: $line-height-computed * 2;
 }
+
 main > .form-horizontal {
   margin-top: $line-height-computed * 2;
 }
@@ -261,7 +264,6 @@ html.turbolinks-progress-bar::before {
   height: 2px !important;
 }
 
-
 @media print {
   main {
     margin: 0;
@@ -279,8 +281,6 @@ html.turbolinks-progress-bar::before {
     content: "";
   }
 }
-
-
 
 /* jQuery UI customizations */
 #ui-datepicker-div {

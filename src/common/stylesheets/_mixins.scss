@@ -3,7 +3,6 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/puzzle/puzzletime.
 
-
 @mixin clearfix {
   &:after {
     content: "";
@@ -14,7 +13,8 @@
 
 @mixin ellipsis($no-wrap: true) {
   @if $no-wrap {
-    white-space: nowrap; }
+    white-space: nowrap;
+  }
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;

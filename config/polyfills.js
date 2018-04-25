@@ -15,8 +15,16 @@ require('whatwg-fetch');
 // It will use the native implementation if it's present and isn't buggy.
 Object.assign = require('object-assign');
 
-// In tests, polyfill requestAnimationFrame since jsdom doesn't provide it yet.
-// We don't polyfill it in the browser--this is user's responsibility.
+// special setup for tests only
 if (process.env.NODE_ENV === 'test') {
+
+  // In tests, polyfill requestAnimationFrame and localStorage since jsdom
+  // doesn't provide it yet.
+  // We don't polyfill it in the browser--this is user's responsibility.
   require('raf').polyfill(global);
+  require('jest-localstorage-mock');
+
+  // setup enzyme with the correct adapter
+  const Adapter = require('enzyme-adapter-react-16');
+  require('enzyme').configure({adapter: new Adapter()});
 }

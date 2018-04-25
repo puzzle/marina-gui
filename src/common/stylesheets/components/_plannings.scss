@@ -3,7 +3,6 @@
 //  or later. See the COPYING file at the top-level directory or at
 //  https://github.com/puzzle/puzzletime.
 
-
 $cell-width: 36px;
 $cell-height: 4rem;
 $weekdays: 5;
@@ -51,18 +50,22 @@ body.order_plannings {
   justify-content: space-between;
   max-width: calc(100vw - 45px);
 }
+
 .planning-board-header.stuck {
   position: fixed;
   padding-left: 30px;
   right: 30px;
 }
+
 .planning-calendar-inner {
   border-right: 1px solid $grey-light;
 }
+
 .planning-calendar-weeks,
 .planning-calendar-days-header {
   padding-left: $legend-width;
 }
+
 .planning-calendar-weeks {
   display: flex;
   flex: 1;
@@ -111,9 +114,11 @@ body.order_plannings {
     color: #666;
   }
 }
+
 .planning-calendar-month-weeks {
   display: flex;
 }
+
 .planning-calendar-week {
   display: flex;
   max-width: $week-width;
@@ -130,6 +135,7 @@ body.order_plannings {
     padding: 0.25rem 0.5rem;
   }
 }
+
 .planning-calendar-days-header {
   cursor: default;
   top: $planning-calendar-days-header-top;
@@ -148,6 +154,7 @@ body.order_plannings {
     padding: 2px;
   }
 }
+
 .planning-calendar-days,
 .planning-calendar-days-header,
 .planning-calendar-inner > .groupheader,
@@ -155,6 +162,7 @@ body.order_plannings {
   display: flex;
   width: calc(var(--days, 1) * #{$cell-width} + #{$legend-width});
 }
+
 .planning-calendar {
   .day, .dayheader {
     min-width: $cell-width;
@@ -169,6 +177,7 @@ body.order_plannings {
     border-left: 1px solid $grey;
   }
 }
+
 .planning-calendar-inner > .groupheader > .legend,
 .planning-calendar-inner > .groupheader > .sticky-wrapper > .legend,
 .planning-calendar-inner > .actions > .buttons,
@@ -209,11 +218,13 @@ body.order_plannings {
   text-overflow: ellipsis;
   margin-right: 0.5em;
 }
+
 .planning-calendar-inner > .groupheader > .sticky-wrapper,
 .planning-calendar-inner > .actions > .sticky-wrapper,
 .planning-calendar-days > .sticky-wrapper {
   width: $legend-width; // set width since Waypoint.Sticky only sets height
 }
+
 .planning-calendar-inner > .groupheader,
 .planning-calendar-inner > .actions,
 .planning-calendar-days {
@@ -231,6 +242,7 @@ body.order_plannings {
   width: 100%;
   cursor: pointer;
 }
+
 .planning-calendar-inner .groupheader-wrapper > .groupheader-title {
   display: flex;
   align-items: center;
@@ -249,6 +261,7 @@ body.order_plannings {
     background-clip: content-box;
   }
 }
+
 .planning-calendar-days {
   > .day.-selected, > .day.-definitive, > .day.-provisional {
     font-weight: normal;
@@ -273,6 +286,7 @@ body.order_plannings {
     right: 0;
   }
 }
+
 .groupheader {
   > .day.has-planning {
     + .has-planning {
@@ -280,6 +294,7 @@ body.order_plannings {
     }
   }
 }
+
 .planning-calendar-inner.editable > .planning-calendar-days {
   > .day {
     cursor: pointer;
@@ -300,15 +315,19 @@ body.order_plannings {
     display: flex;
   }
 }
+
 .planning-percent-group {
   width: 8em;
 }
+
 .planning-repetition-group {
   width: 9em;
 }
+
 .planning-definitive-group button:focus {
   background-color: transparent;
 }
+
 .planning-delete {
   margin-right: auto;
 }
@@ -318,10 +337,12 @@ body.order_plannings {
   position: sticky;
   left: 0;
 }
+
 .planning-legend.stuck {
   position: fixed;
   padding-left: 30px;
 }
+
 .planning-legend-table {
   td {
     padding: 2px;
@@ -441,9 +462,11 @@ body.order_plannings {
 .over_planned {
   background-color: #E39797 !important;
 }
+
 .under_planned {
   background-color: #ECDBA0 !important;
 }
+
 .fully_planned {
   background-color: #B0DAA5 !important;
 }

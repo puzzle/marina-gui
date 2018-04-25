@@ -1,7 +1,7 @@
-import {alert} from './alert.reducer';
+import { alert } from './alert.reducer';
 
 export * from './alert.actions';
-export {default as App} from './App';
+export { default as App } from './App';
 export * from './history';
 export * from './registerServiceWorker';
 export * from './store';
