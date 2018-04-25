@@ -15,7 +15,6 @@ import Dashboard from '../dashboard/Dashboard';
 import './App.css';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
