@@ -33,7 +33,7 @@ pipeline {
              yarn --version
              
              yarn install
-             yarn test
+             CI=true yarn test --coverage
              NODE_ENV=production yarn build
            """
       }
