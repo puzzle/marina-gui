@@ -33,7 +33,8 @@ pipeline {
              yarn --version
              
              yarn install
-             NODE_ENV=production yarn run build
+             yarn test
+             NODE_ENV=production yarn build
            """
       }
     }

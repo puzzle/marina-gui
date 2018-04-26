@@ -8,10 +8,14 @@ RUN cd /tmp/src && yarn install && NODE_ENV=production yarn run build
 RUN mv /tmp/src/build/* /usr/share/nginx/html/
 
 # nginx cache
-RUN mkdir -p /var/cache/nginx/{client_temp,fastcgi_temp,proxy_temp}
+RUN mkdir -p /var/cache/nginx/client_temp
+RUN mkdir -p /var/cache/nginx/fastcgi_temp
+RUN mkdir -p /var/cache/nginx/proxy_temp
+
 # nginx logs
 RUN mkdir -p /var/log/nginx
-RUN touch /var/log/nginx/{error,access}.log
+RUN touch /var/log/nginx/error.log
+RUN touch /var/log/nginx/access.log
 
 # support running as arbitrary user which belogs to the root group
 RUN chmod -R g+rwx /var/cache/nginx /var/run /var/log/nginx
