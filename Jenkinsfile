@@ -3,6 +3,8 @@ pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
     timeout(time: 10, unit: 'MINUTES')
+    timestamps()
+    ansiColor('xterm')
   }
   triggers {
     pollSCM('H/5 * * * *')
