@@ -20,12 +20,12 @@ class NavItem extends Component {
   }
 
   render() {
-    const { location, to, children, match, history, ...props } = this.props;
+    const { to, children } = this.props;
     const isActive = this.state.location.pathname === to;
 
     return (
       <li className={isActive ? 'active' : ''}>
-        <Link {...props} to={to}>{children}</Link>
+        <Link to={to}>{children}</Link>
       </li>
     );
   }

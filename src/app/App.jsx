@@ -15,6 +15,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Employees from '../employee/Employees';
 
 import './App.css';
+import Employee from '../employee/Employee';
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class App extends Component {
               <Route exact path="/" component={Dashboard} />
               <Route path="/user-settings" component={UserSettings} />
               <Route path="/employees" component={Employees} />
+              <Route path="/employee/:id" component={Employee} />
             </Switch>
           </div>
         </div>

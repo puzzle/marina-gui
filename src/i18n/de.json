@@ -25,6 +25,7 @@
       "text": "Vereinbarung",
       "true": "OK",
       "false": "Noch nicht hochgeladen"
-    }
+    },
+    "addManually": "Manuell hinzufügen"
   }
 }

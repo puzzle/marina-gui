@@ -25,6 +25,7 @@
       "text": "Agreement",
       "true": "OK",
       "false": "Not uploaded yet"
-    }
+    },
+    "addManually": "Manuell hinzufügen"
   }
 }

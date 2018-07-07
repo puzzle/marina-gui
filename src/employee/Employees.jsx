@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactTable from 'react-table';
-import { getTranslate } from 'react-localize-redux/lib/index';
 import { connect } from 'react-redux';
+import { getTranslate } from 'react-localize-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faBan from '@fortawesome/fontawesome-free-solid/faBan';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import { employeeActions } from './employee.actions';
 
 class Employees extends React.Component {
@@ -40,6 +41,11 @@ class Employees extends React.Component {
       <div>
         <h1>{translate('navigation.employees')}</h1>
         <ReactTable data={data} columns={columns} minRows={0} />
+        <ButtonToolbar style={{ marginTop: '20px' }}>
+          <Button href="/employee/new">
+            {translate('employee.addManually')}
+          </Button>
+        </ButtonToolbar>
       </div>
     );
   }
