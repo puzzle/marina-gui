@@ -4,6 +4,7 @@ export const employeeService = {
   getEmployee,
   getCurrentEmployee,
   makeCurrentEmployee,
+  getEmployees,
 };
 
 function getEmployee(email) {
@@ -18,5 +19,10 @@ function getCurrentEmployee() {
 
 function makeCurrentEmployee() {
   return fetch(url('/employees/user'), makeRequestOptions('POST'))
+    .then(handleResponse);
+}
+
+function getEmployees() {
+  return fetch(url('/employees'), makeRequestOptions('GET'))
     .then(handleResponse);
 }

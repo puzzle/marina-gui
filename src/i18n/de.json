@@ -5,14 +5,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Willkommen, ${firstName} ${lastName}",
-    "username": "Username",
-    "email": "E-Mail-Adresse",
-    "agreement": {
-      "text": "Vereinbarung",
-      "true": "OK",
-      "false": "Noch nicht hochgeladen"
-    }
+    "welcome": "Willkommen, ${firstName} ${lastName}"
   },
   "header": {
     "title": "Willkommen im Marina GUI"
@@ -20,6 +13,18 @@
   "navigation": {
     "dashboard": "Dashboard",
     "userSettings": "Benutzereinstellungen",
-    "logout": "Logout"
+    "logout": "Logout",
+    "employees": "Mitarbeiter"
+  },
+  "employee": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "username": "Username",
+    "email": "E-Mail-Adresse",
+    "agreement": {
+      "text": "Vereinbarung",
+      "true": "OK",
+      "false": "Noch nicht hochgeladen"
+    }
   }
 }

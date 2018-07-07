@@ -1,5 +1,4 @@
 import { authenticationService } from './authentication.service';
-import { history } from '../app';
 import { employeeActions } from '../employee';
 
 export const authenticationConstants = {
@@ -23,7 +22,6 @@ function checkLogin() {
       .then(
         (user) => {
           dispatch(success(user));
-          history.push('/');
           dispatch(employeeActions.checkEmployee());
         },
         (error) => {

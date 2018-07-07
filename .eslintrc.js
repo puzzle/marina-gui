@@ -14,6 +14,7 @@ rules.globals.jest = false;
 rules.rules['no-underscore-dangle'] = 'off';
 rules.rules['react/prop-types'] = 'off';
 rules.rules['react/no-array-index-key'] = 'off';
+rules.rules['react/prefer-stateless-function'] = 'off';
 rules.rules['object-curly-newline'] = 'off';
 rules.rules['function-paren-newline'] = 'off';
 rules.rules['no-console'] = 'off';
