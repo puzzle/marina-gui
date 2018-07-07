@@ -1,4 +1,4 @@
-export const url = path => `${process.env.REACT_APP_BACKEND_URL}${path}${process.env.REACT_APP_BACKEND_SUFFIX}`;
+import { url, handleResponse, makeRequestOptions } from '../common/service.helper';
 
 export const authenticationService = {
   getUser,
@@ -6,15 +6,7 @@ export const authenticationService = {
 };
 
 function getUser() {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    mode: 'cors',
-    redirect: 'error',
-  };
-
-  return fetch(url('/user'), requestOptions)
+  return fetch(url('/user'), makeRequestOptions('GET'))
     .then(handleResponse)
     .then((user) => {
       // login successful if there's a username in the response
@@ -34,12 +26,4 @@ function redirectTo(newUrl) {
   if (process.env.NODE_ENV !== 'test') {
     window.location.replace(newUrl);
   }
-}
-
-function handleResponse(response) {
-  if (!response.ok) {
-    return Promise.reject(response.statusText);
-  }
-
-  return response.json();
 }

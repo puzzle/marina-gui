@@ -1,5 +1,6 @@
 import { authenticationService } from './authentication.service';
 import { history } from '../app';
+import { employeeActions } from '../employee';
 
 export const authenticationConstants = {
   CHECK_LOGIN_REQUEST: 'USERS_CHECK_LOGIN_REQUEST',
@@ -23,6 +24,7 @@ function checkLogin() {
         (user) => {
           dispatch(success(user));
           history.push('/');
+          dispatch(employeeActions.checkEmployee());
         },
         (error) => {
           dispatch(failure(error));

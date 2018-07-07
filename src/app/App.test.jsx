@@ -11,11 +11,14 @@ jest.mock('../i18n/index');
 
 it('renders without crashing', () => {
   // given
-  const store = mockStore({});
+  const store = mockStore({
+    authentication: { user: {} },
+    locale: { languages: [{ code: 'en', active: true }], translations: {} },
+  });
 
   // when
-  const wrapper = shallow(<App store={store}/>).dive();
+  const wrapper = shallow(<App store={store} />).dive();
 
   // then
-  expect(wrapper.find('div#main').length).toBe(1)
+  expect(wrapper.find('div#main').length).toBe(1);
 });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { setActiveLanguage } from 'react-localize-redux';
+import { setActiveLanguage, getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
 
 import { store } from './store';
@@ -27,7 +27,10 @@ class App extends Component {
   }
 
   render() {
-    const { alert } = this.props;
+    const { alert, user, translate } = this.props;
+    if (!user) {
+      return (translate('app.redirectLogin'));
+    }
     return (
       <Router>
         <div>
@@ -52,8 +55,11 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const { alert } = state;
+  const { user } = state.authentication;
   return {
+    user,
     alert,
+    translate: getTranslate(state.locale),
   };
 }
 

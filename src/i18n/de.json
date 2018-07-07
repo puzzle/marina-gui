@@ -1,10 +1,18 @@
 {
   "app": {
-    "title": "Marina GUI"
+    "title": "Marina GUI",
+    "redirectLogin": "Lade..."
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Willkommen, ${firstName} ${lastName}"
+    "welcome": "Willkommen, ${firstName} ${lastName}",
+    "username": "Username",
+    "email": "E-Mail-Adresse",
+    "agreement": {
+      "text": "Vereinbarung",
+      "true": "OK",
+      "false": "Noch nicht hochgeladen"
+    }
   },
   "header": {
     "title": "Willkommen im Marina GUI"

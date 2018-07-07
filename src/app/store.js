@@ -5,6 +5,7 @@ import { createLogger } from 'redux-logger';
 
 import { alert } from './alert.reducer';
 import { authReducers } from '../auth';
+import { employeeReducers } from '../employee';
 
 const loggerMiddleware = createLogger();
 export const store = createStore(
@@ -12,6 +13,7 @@ export const store = createStore(
     locale,
     alert,
     ...authReducers,
+    ...employeeReducers,
   }),
   applyMiddleware(
     thunkMiddleware,
