@@ -12,12 +12,27 @@ export const employeeConstants = {
   GET_EMPLOYEES_REQUEST: 'GET_EMPLOYEES_REQUEST',
   GET_EMPLOYEES_SUCCESS: 'GET_EMPLOYEES_SUCCESS',
   GET_EMPLOYEES_FAILURE: 'GET_EMPLOYEES_FAILURE',
+
+  GET_EMPLOYEE_REQUEST: 'GET_EMPLOYEE_REQUEST',
+  GET_EMPLOYEE_SUCCESS: 'GET_EMPLOYEE_SUCCESS',
+  GET_EMPLOYEE_FAILURE: 'GET_EMPLOYEE_FAILURE',
+
+  SAVE_EMPLOYEE_REQUEST: 'SAVE_EMPLOYEE_REQUEST',
+  SAVE_EMPLOYEE_SUCCESS: 'SAVE_EMPLOYEE_SUCCESS',
+  SAVE_EMPLOYEE_FAILURE: 'SAVE_EMPLOYEE_FAILURE',
+
+  UPLOAD_EMPLOYEE_AGREEMENT_REQUEST: 'UPLOAD_EMPLOYEE_AGREEMENT_REQUEST',
+  UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS: 'UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS',
+  UPLOAD_EMPLOYEE_AGREEMENT_FAILURE: 'UPLOAD_EMPLOYEE_AGREEMENT_FAILURE',
 };
 
 export const employeeActions = {
   checkEmployee,
   makeEmployee,
   getEmployees,
+  getEmployee,
+  saveEmployee,
+  uploadFile,
 };
 
 function checkEmployee() {
@@ -26,7 +41,7 @@ function checkEmployee() {
 
     employeeService.getCurrentEmployee()
       .then(
-        employee => dispatch(success(employee)),
+        userEmployee => dispatch(success(userEmployee)),
         (error) => {
           dispatch(failure(error));
           dispatch(makeEmployee());
@@ -38,8 +53,8 @@ function checkEmployee() {
     return { type: employeeConstants.CHECK_EMPLOYEE_REQUEST };
   }
 
-  function success(employee) {
-    return { type: employeeConstants.CHECK_EMPLOYEE_SUCCESS, employee };
+  function success(userEmployee) {
+    return { type: employeeConstants.CHECK_EMPLOYEE_SUCCESS, userEmployee };
   }
 
   function failure(error) {
@@ -95,5 +110,77 @@ function getEmployees() {
 
   function failure(error) {
     return { type: employeeConstants.GET_EMPLOYEES_FAILURE, error };
+  }
+}
+
+function getEmployee(id) {
+  return (dispatch) => {
+    dispatch(request());
+
+    employeeService.getEmployee(id)
+      .then(
+        employee => dispatch(success(employee)),
+        error => dispatch(failure(error)),
+      );
+  };
+
+  function request() {
+    return { type: employeeConstants.GET_EMPLOYEE_REQUEST };
+  }
+
+  function success(employee) {
+    return { type: employeeConstants.GET_EMPLOYEE_SUCCESS, employee };
+  }
+
+  function failure(error) {
+    return { type: employeeConstants.GET_EMPLOYEE_FAILURE, error };
+  }
+}
+
+function saveEmployee(employee) {
+  return (dispatch) => {
+    dispatch(request());
+
+    employeeService.saveEmployee(employee)
+      .then(
+        updatedEmployee => dispatch(success(updatedEmployee)),
+        error => dispatch(failure(error)),
+      );
+  };
+
+  function request() {
+    return { type: employeeConstants.SAVE_EMPLOYEE_REQUEST };
+  }
+
+  function success(updatedEmployee) {
+    return { type: employeeConstants.SAVE_EMPLOYEE_SUCCESS, employee: updatedEmployee };
+  }
+
+  function failure(error) {
+    return { type: employeeConstants.SAVE_EMPLOYEE_FAILURE, error };
+  }
+}
+
+function uploadFile(id, file) {
+  return (dispatch) => {
+    dispatch(request());
+
+    employeeService.uploadFile(id, file)
+      .then(
+        agreement => dispatch(success(agreement)),
+        error => dispatch(failure(error)),
+      );
+  };
+
+  function request() {
+    return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_REQUEST };
+  }
+
+  function success(agreement) {
+    return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS, agreement };
+  }
+
+  function failure(error) {
+    return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_FAILURE, error };
   }
 }

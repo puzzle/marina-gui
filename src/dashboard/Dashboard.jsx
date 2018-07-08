@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class Dashboard extends Component {
   render() {
-    const { translate, user, employee } = this.props;
+    const { translate, user, userEmployee } = this.props;
     return (
       <div>
         <h1>{translate('dashboard.title')}</h1>
@@ -12,7 +12,7 @@ class Dashboard extends Component {
         <ul>
           <li>{translate('employee.username')}: {user && user.username}</li>
           <li>{translate('employee.email')}: {user && user.email}</li>
-          <li>{translate('employee.agreement.text')}: {translate(`employee.agreement.${employee && !!employee.agreement}`)}</li>
+          <li>{translate('employee.agreement.text')}: {translate(`employee.agreement.${userEmployee && !!userEmployee.agreement}`)}</li>
         </ul>
       </div>
     );
@@ -21,10 +21,10 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   const { user } = state.authentication;
-  const { employee } = state;
+  const { userEmployee } = state.userEmployee;
   return {
     user,
-    employee,
+    userEmployee,
     translate: getTranslate(state.locale),
   };
 }

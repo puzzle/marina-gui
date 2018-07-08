@@ -21,3 +21,15 @@ export function makeRequestOptions(method) {
 }
 
 export const url = path => `${process.env.REACT_APP_BACKEND_URL}${path}${process.env.REACT_APP_BACKEND_SUFFIX}`;
+
+export function getValueFromInputChangeEvent(event) {
+  const { target } = event;
+  switch (target.type) {
+    case 'checkbox':
+      return target.checked;
+    case 'file':
+      return target.files[0];
+    default:
+      return target.value;
+  }
+}

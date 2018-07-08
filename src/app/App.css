@@ -42,3 +42,8 @@
   padding: 20px;
   grid-area: main;
 }
+
+.ReactTable .rt-thead .rt-tr {
+  text-align: left;
+  font-weight: bold;
+}

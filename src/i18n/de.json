@@ -14,7 +14,8 @@
     "dashboard": "Dashboard",
     "userSettings": "Benutzereinstellungen",
     "logout": "Logout",
-    "employees": "Mitarbeiter"
+    "employees": "Mitarbeiter",
+    "editCreateEmployee": "Mitarbeiter bearbeiten/erstellen"
   },
   "employee": {
     "firstName": "Vorname",
@@ -23,9 +24,14 @@
     "email": "E-Mail-Adresse",
     "agreement": {
       "text": "Vereinbarung",
+      "current": "Aktuelle Vereinbarung",
       "true": "OK",
       "false": "Noch nicht hochgeladen"
     },
-    "addManually": "Manuell hinzufügen"
+    "agreementFile": "Neue Vereinbarung hochladen",
+    "addManually": "Manuell hinzufügen",
+    "bruttoSalary": "Bruto-Monatslohn",
+    "save": "Speichern",
+    "upload": "Hochladen"
   }
 }

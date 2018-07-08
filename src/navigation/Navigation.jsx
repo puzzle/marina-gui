@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 import NavItem from './NavItem';
 
-const Navigation = ({ translate, user, employee }) => (
+const Navigation = ({ translate, user, userEmployee }) => (
   <nav>
     <div className="navbar navbar-inverse" id="menu">
       <div className="container-fluid">
@@ -11,7 +11,7 @@ const Navigation = ({ translate, user, employee }) => (
           <NavItem to="/">
             {translate('navigation.dashboard')}
           </NavItem>
-          {employee && !!employee.agreement &&
+          {userEmployee && !!userEmployee.agreement &&
           <NavItem to="/user-settings">
             {translate('navigation.userSettings')}
           </NavItem>
@@ -29,10 +29,10 @@ const Navigation = ({ translate, user, employee }) => (
 
 function mapStateToProps(state) {
   const { user } = state.authentication;
-  const { employee } = state;
+  const { userEmployee } = state.userEmployee;
   return {
     user,
-    employee,
+    userEmployee,
     translate: getTranslate(state.locale),
   };
 }

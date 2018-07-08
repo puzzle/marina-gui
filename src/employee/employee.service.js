@@ -2,12 +2,18 @@ import { url, handleResponse, makeRequestOptions } from '../common/service.helpe
 
 export const employeeService = {
   getEmployee,
+  getEmployeeByEmail,
   getCurrentEmployee,
   makeCurrentEmployee,
   getEmployees,
 };
 
-function getEmployee(email) {
+function getEmployee(id) {
+  return fetch(url(`/employees/${id}`), makeRequestOptions('GET'))
+    .then(handleResponse);
+}
+
+function getEmployeeByEmail(email) {
   return fetch(url(`/employees/email?email=${encodeURIComponent(email)}`), makeRequestOptions('GET'))
     .then(handleResponse);
 }

@@ -14,7 +14,8 @@
     "dashboard": "Dashboard",
     "userSettings": "User Settings",
     "logout": "Logout",
-    "employees": "Employees"
+    "employees": "Employees",
+    "editCreateEmployee": "Edit/create employee"
   },
   "employee": {
     "firstName": "First name",
@@ -23,9 +24,14 @@
     "email": "E-mail address",
     "agreement": {
       "text": "Agreement",
+      "current": "Current agreement",
       "true": "OK",
       "false": "Not uploaded yet"
     },
-    "addManually": "Manuell hinzufügen"
+    "agreementFile": "Upload new agreement",
+    "addManually": "Add manually",
+    "bruttoSalary": "Monthly gross salary",
+    "save": "Save",
+    "upload": "Upload"
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -19,41 +20,50 @@ class Employees extends React.Component {
   render() {
     const { translate, employees } = this.props;
 
-    const data = employees.employees || [];
-
-    const columns = [{
-      Header: translate('employee.firstName'),
-      accessor: 'firstName',
-    }, {
-      Header: translate('employee.lastName'),
-      accessor: 'lastName',
-    }, {
-      Header: translate('employee.username'),
-      accessor: 'username',
-    }, {
-      id: 'agreement',
-      Header: translate('employee.agreement.text'),
-      accessor: e => (e.agreement ? faCheckCircle : faBan),
-      Cell: props => <FontAwesomeIcon icon={props.value} />,
-    }];
+    const data = employees || [];
+    const columns = getColumnDefinitions(translate);
 
     return (
       <div>
         <h1>{translate('navigation.employees')}</h1>
         <ReactTable data={data} columns={columns} minRows={0} />
         <ButtonToolbar style={{ marginTop: '20px' }}>
-          <Button href="/employee/new">
-            {translate('employee.addManually')}
-          </Button>
+          <Link to="/employee/new">
+            <Button>
+              {translate('employee.addManually')}
+            </Button>
+          </Link>
         </ButtonToolbar>
       </div>
     );
   }
 }
 
+function getColumnDefinitions(translate) {
+  return [{
+    Header: translate('employee.firstName'),
+    accessor: 'firstName',
+    Cell: row => <Link to={`/employee/${row.original.id}`}>{row.value}</Link>,
+  }, {
+    Header: translate('employee.lastName'),
+    accessor: 'lastName',
+  }, {
+    Header: translate('employee.username'),
+    accessor: 'username',
+  }, {
+    Header: translate('employee.email'),
+    accessor: 'email',
+  }, {
+    id: 'agreement',
+    Header: translate('employee.agreement.text'),
+    accessor: e => (e.agreement ? faCheckCircle : faBan),
+    Cell: row => <FontAwesomeIcon icon={row.value} />,
+  }];
+}
+
 function mapStateToProps(state) {
   const { user } = state.authentication;
-  const { employees } = state;
+  const { employees } = state.employees;
   return {
     user,
     employees,
