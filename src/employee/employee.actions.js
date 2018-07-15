@@ -153,7 +153,10 @@ function saveEmployee(employee) {
   }
 
   function success(updatedEmployee) {
-    return { type: employeeConstants.SAVE_EMPLOYEE_SUCCESS, employee: updatedEmployee };
+    return {
+      type: employeeConstants.SAVE_EMPLOYEE_SUCCESS,
+      employee: updatedEmployee,
+    };
   }
 
   function failure(error) {
@@ -161,13 +164,16 @@ function saveEmployee(employee) {
   }
 }
 
-function uploadFile(id, file) {
+function uploadFile(employeeId, file) {
   return (dispatch) => {
     dispatch(request());
 
-    employeeService.uploadFile(id, file)
+    employeeService.uploadFile(employeeId, file)
       .then(
-        agreement => dispatch(success(agreement)),
+        (agreement) => {
+          dispatch(success(agreement));
+          dispatch(checkEmployee());
+        },
         error => dispatch(failure(error)),
       );
   };
@@ -176,8 +182,11 @@ function uploadFile(id, file) {
     return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_REQUEST };
   }
 
-  function success(agreement) {
-    return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS, agreement };
+  function success(updatedEmployee) {
+    return {
+      type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS,
+      employee: updatedEmployee,
+    };
   }
 
   function failure(error) {

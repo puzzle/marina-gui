@@ -20,6 +20,7 @@ class Employee extends React.Component {
 
     this.state = {
       id: null,
+      version: null,
       firstName: '',
       lastName: '',
       email: '',
@@ -45,14 +46,19 @@ class Employee extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { employee } = nextProps;
-    if (employee && this.state.id === null) {
+    if (employee) {
+      const validation = {
+        bruttoSalary: employee.bruttoSalary > 0 ? 'success' : 'error',
+      };
       this.setState({
         id: employee.id,
+        version: employee.version,
         firstName: employee.firstName,
         lastName: employee.lastName,
         email: employee.email,
         username: employee.username,
         bruttoSalary: employee.bruttoSalary || 0,
+        validation,
       });
     }
   }

@@ -1,4 +1,9 @@
-import { url, handleResponse, makeRequestOptions } from '../common/service.helper';
+import {
+  fetchCreatedEntity,
+  handleResponse, makeMultipart,
+  makeRequestOptions,
+  url,
+} from '../common/service.helper';
 
 export const employeeService = {
   getEmployee,
@@ -6,6 +11,8 @@ export const employeeService = {
   getCurrentEmployee,
   makeCurrentEmployee,
   getEmployees,
+  saveEmployee,
+  uploadFile,
 };
 
 function getEmployee(id) {
@@ -31,4 +38,21 @@ function makeCurrentEmployee() {
 function getEmployees() {
   return fetch(url('/employees'), makeRequestOptions('GET'))
     .then(handleResponse);
+}
+
+function saveEmployee(employee) {
+  if (employee.id !== null) {
+    return fetch(url(`/employees/${employee.id}`), makeRequestOptions('PUT', { body: JSON.stringify(employee) }))
+      .then(() => getEmployee(employee.id));
+  }
+  return fetch(url('/employees'), makeRequestOptions('POST', {
+    body: JSON.stringify(employee),
+  }))
+    .then(fetchCreatedEntity)
+    .then(handleResponse);
+}
+
+function uploadFile(employeeId, file) {
+  return fetch(url(`/employees/${employeeId}/agreement`), makeMultipart('POST', { file }))
+    .then(() => getEmployee(employeeId));
 }

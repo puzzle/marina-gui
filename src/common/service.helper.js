@@ -10,10 +10,37 @@ export function handleResponse(response) {
   return response.json();
 }
 
-export function makeRequestOptions(method) {
+export function fetchCreatedEntity(response) {
+  if (!response.ok) {
+    return Promise.reject(response.statusText);
+  }
+
+  if (response.status === 201 && response.headers.get('Location')) {
+    return fetch(response.headers.get('Location'), makeRequestOptions('GET'));
+  }
+
+  return response;
+}
+
+export function makeRequestOptions(method, obj = {}) {
   return {
     method,
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    mode: 'cors',
+    redirect: 'error',
+    ...obj,
+  };
+}
+
+export function makeMultipart(method, params = {}) {
+  const formData = new FormData();
+  Object.getOwnPropertyNames(params).forEach((name) => {
+    formData.append(name, params[name]);
+  });
+  return {
+    method,
+    body: formData,
     credentials: 'include',
     mode: 'cors',
     redirect: 'error',
