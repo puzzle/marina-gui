@@ -8,6 +8,7 @@ import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faBan from '@fortawesome/fontawesome-free-solid/faBan';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { employeeActions } from './employee.actions';
+import { formatCurrency } from '../common/number.helper';
 
 class Employees extends React.Component {
   constructor(props) {
@@ -58,6 +59,15 @@ function getColumnDefinitions(translate) {
     Header: translate('employee.agreement.text'),
     accessor: e => (e.agreement ? faCheckCircle : faBan),
     Cell: row => <FontAwesomeIcon icon={row.value} />,
+  }, {
+    id: 'amountChf',
+    Header: translate('employee.currentConfiguration.amountChf'),
+    accessor: e => (e.currentConfiguration ? e.currentConfiguration.amountChf : null),
+    Cell: row => ` CHF ${formatCurrency(row.value)}`,
+  }, {
+    id: 'address',
+    Header: translate('employee.currentConfiguration.address'),
+    accessor: e => (e.currentConfiguration ? e.currentConfiguration.currentAddress : '-'),
   }];
 }
 

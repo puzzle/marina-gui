@@ -46,7 +46,7 @@ class App extends Component {
           <div id="main">
             {alert && alert.message &&
             <div className={`alert ${alert.type}`}>
-              {alert.message.toString()}
+              {translate(alert.message.toString())}
             </div>
             }
             <Switch>

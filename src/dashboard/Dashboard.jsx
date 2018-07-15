@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
+import { formatCurrency } from '../common/number.helper';
 
 class Dashboard extends Component {
   render() {
@@ -12,6 +13,7 @@ class Dashboard extends Component {
         <ul>
           <li>{translate('employee.username')}: {user && user.username}</li>
           <li>{translate('employee.email')}: {user && user.email}</li>
+          <li>{translate('employee.bruttoSalary')}: CHF {userEmployee && (formatCurrency(userEmployee.bruttoSalary) || '-')}</li>
           <li>{translate('employee.agreement.text')}: {translate(`employee.agreement.${userEmployee && !!userEmployee.agreement}`)}</li>
         </ul>
       </div>

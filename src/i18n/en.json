@@ -28,10 +28,19 @@
       "true": "OK",
       "false": "Not uploaded yet"
     },
+    "currentConfiguration": {
+      "percentage": "Percent of monthly gross salary",
+      "zeroPercent": "0% (no Bitcoin payment)",
+      "address": "Recipient Bitcoin address",
+      "amountChf": "Selected amount"
+    },
     "agreementFile": "Upload new agreement",
     "addManually": "Add manually",
     "bruttoSalary": "Monthly gross salary",
     "save": "Save",
     "upload": "Upload"
+  },
+  "save": {
+    "success": "Saved successfully"
   }
 }

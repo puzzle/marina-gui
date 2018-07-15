@@ -11,7 +11,7 @@ const Navigation = ({ translate, user, userEmployee }) => (
           <NavItem to="/">
             {translate('navigation.dashboard')}
           </NavItem>
-          {userEmployee && !!userEmployee.agreement &&
+          {userEmployee && !!userEmployee.agreement && userEmployee.bruttoSalary > 0 &&
           <NavItem to="/user-settings">
             {translate('navigation.userSettings')}
           </NavItem>

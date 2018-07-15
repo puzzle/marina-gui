@@ -28,10 +28,19 @@
       "true": "OK",
       "false": "Noch nicht hochgeladen"
     },
+    "currentConfiguration": {
+      "percentage": "Prozent des Monats-Bruttolohns",
+      "zeroPercent": "0% (keine Bitcoin-Auszahlung)",
+      "address": "Empfänger-Bitcoin-Adresse",
+      "amountChf": "Gewählter Auszahlungsbetrag"
+    },
     "agreementFile": "Neue Vereinbarung hochladen",
     "addManually": "Manuell hinzufügen",
-    "bruttoSalary": "Bruto-Monatslohn",
+    "bruttoSalary": "Brutto-Monatslohn",
     "save": "Speichern",
     "upload": "Hochladen"
+  },
+  "save": {
+    "success": "Erfolgreich gespeichert"
   }
 }

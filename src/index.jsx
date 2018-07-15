@@ -9,7 +9,8 @@ import './common/stylesheets/styles.css';
 import { App, registerServiceWorker, store } from './app';
 import { availableLanguages, currentLanguage, loadTranslations } from './i18n';
 
-store.dispatch(initialize(availableLanguages, { defaultLanguage: currentLanguage }));
+// eslint-disable-next-line
+store.dispatch(initialize(availableLanguages, { defaultLanguage: currentLanguage, missingTranslationMsg: '${key}' }));
 availableLanguages.forEach(lang => store.dispatch(addTranslationForLanguage(loadTranslations(lang), lang)));
 
 ReactDOM.render(

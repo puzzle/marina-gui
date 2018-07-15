@@ -1,6 +1,7 @@
 import {
   fetchCreatedEntity,
-  handleResponse, makeMultipart,
+  handleResponse,
+  makeMultipart,
   makeRequestOptions,
   url,
 } from '../common/service.helper';

@@ -143,7 +143,10 @@ function saveEmployee(employee) {
 
     employeeService.saveEmployee(employee)
       .then(
-        updatedEmployee => dispatch(success(updatedEmployee)),
+        (updatedEmployee) => {
+          dispatch(success(updatedEmployee));
+          dispatch(checkEmployee());
+        },
         error => dispatch(failure(error)),
       );
   };
