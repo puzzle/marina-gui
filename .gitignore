@@ -22,6 +22,4 @@ yarn-error.log*
 
 .idea/workspace.xml
 
-*.iml
-
 /public/mock-backend
