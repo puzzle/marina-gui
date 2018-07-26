@@ -26,7 +26,8 @@
       "text": "Agreement",
       "current": "Current agreement",
       "true": "OK",
-      "false": "Not uploaded yet"
+      "false": "Not uploaded yet",
+      "total": "Total"
     },
     "currentConfiguration": {
       "percentage": "Percent of monthly gross salary",

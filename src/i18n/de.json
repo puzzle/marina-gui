@@ -26,7 +26,8 @@
       "text": "Vereinbarung",
       "current": "Aktuelle Vereinbarung",
       "true": "OK",
-      "false": "Noch nicht hochgeladen"
+      "false": "Noch nicht hochgeladen",
+      "total": "Total"
     },
     "currentConfiguration": {
       "percentage": "Prozent des Monats-Bruttolohns",

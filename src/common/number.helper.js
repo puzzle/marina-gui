@@ -20,10 +20,10 @@ export function round5Cents(num) {
 }
 
 export function formatCurrency(x) {
-  if (x === null || x === undefined) {
+  if (x === null || x === undefined || Number.isNaN(x)) {
     return x;
   }
-  const parts = x.toString().split('.');
+  const parts = Number(x).toFixed(2).toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\'');
   return parts.join('.');
 }

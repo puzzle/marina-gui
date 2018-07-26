@@ -7,6 +7,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faBan from '@fortawesome/fontawesome-free-solid/faBan';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
 import { formatCurrency } from '../common/number.helper';
 
@@ -57,13 +58,20 @@ function getColumnDefinitions(translate) {
   }, {
     id: 'agreement',
     Header: translate('employee.agreement.text'),
-    accessor: e => (e.agreement ? faCheckCircle : faBan),
-    Cell: row => <FontAwesomeIcon icon={row.value} />,
+    Cell: row => <FontAwesomeIcon icon={row.value !== null ? faCheckCircle : faBan} />,
+    Footer: (row) => {
+      const total = _.sumBy(row.data, d => (d.agreement !== null ? 1 : 0));
+      return (<span><strong>{translate('employee.agreement.total')}</strong> {total}</span>);
+    },
   }, {
     id: 'amountChf',
     Header: translate('employee.currentConfiguration.amountChf'),
     accessor: e => (e.currentConfiguration ? e.currentConfiguration.amountChf : null),
-    Cell: row => ` CHF ${formatCurrency(row.value)}`,
+    Cell: row => (row.value !== null ? ` CHF ${formatCurrency(row.value)}` : '-'),
+    Footer: (row) => {
+      const total = _.sumBy(row.data, 'amountChf') || 0;
+      return (<span><strong>{translate('employee.agreement.total')}</strong> CHF {formatCurrency(total)}</span>);
+    },
   }, {
     id: 'address',
     Header: translate('employee.currentConfiguration.address'),
