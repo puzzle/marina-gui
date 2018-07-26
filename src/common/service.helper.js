@@ -1,3 +1,5 @@
+import { authenticationService } from '../auth';
+
 export function handleResponse(response) {
   if (!response.ok) {
     return Promise.reject(response.statusText);
@@ -5,6 +7,10 @@ export function handleResponse(response) {
 
   if (response.status === 201 || response.status === 204) {
     return {};
+  }
+
+  if (response.redirected && response.body.indexOf('<html') >= 0) {
+    authenticationService.redirectToLogin();
   }
 
   return response.json();
@@ -28,7 +34,7 @@ export function makeRequestOptions(method, obj = {}) {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     mode: 'cors',
-    redirect: 'error',
+    redirect: 'follow',
     ...obj,
   };
 }
@@ -43,7 +49,7 @@ export function makeMultipart(method, params = {}) {
     body: formData,
     credentials: 'include',
     mode: 'cors',
-    redirect: 'error',
+    redirect: 'follow',
   };
 }
 
