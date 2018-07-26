@@ -56,8 +56,8 @@ function getColumnDefinitions(translate) {
     Header: translate('employee.email'),
     accessor: 'email',
   }, {
-    id: 'agreement',
     Header: translate('employee.agreement.text'),
+    accessor: 'agreement',
     Cell: row => <FontAwesomeIcon icon={row.value !== null ? faCheckCircle : faBan} />,
     Footer: (row) => {
       const total = _.sumBy(row.data, d => (d.agreement !== null ? 1 : 0));
