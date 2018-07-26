@@ -1,14 +1,11 @@
 {
   "app": {
-    "title": "Marina GUI",
+    "title": "Marina",
     "redirectLogin": "Lade..."
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Willkommen, ${firstName} ${lastName}"
-  },
-  "header": {
-    "title": "Willkommen im Marina GUI"
+    "welcome": "Willkommen in der Marina-Applikation, ${firstName} ${lastName}"
   },
   "navigation": {
     "dashboard": "Dashboard",
