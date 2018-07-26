@@ -6,7 +6,7 @@ export const navigatorLanguage = (
 
 /* eslint-disable */
 export let currentLanguage = (
-  availableLanguages.hasOwnProperty(navigatorLanguage) ? navigatorLanguage : 'en'
+  availableLanguages.indexOf(navigatorLanguage) >= 0 ? navigatorLanguage : 'en'
 );
 
 export const loadTranslations = (l) => {
