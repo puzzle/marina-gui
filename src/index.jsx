@@ -6,7 +6,7 @@ import { addTranslationForLanguage, initialize } from 'react-localize-redux';
 import 'bootstrap/fonts/glyphicons-halflings-regular.eot';
 import './common/stylesheets/styles.css';
 
-import { App, registerServiceWorker, store } from './app';
+import { App, store } from './app';
 import { availableLanguages, currentLanguage, loadTranslations } from './i18n';
 
 // eslint-disable-next-line
