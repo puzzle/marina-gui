@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { getTranslate, setActiveLanguage } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import 'react-table/react-table.css';
@@ -35,7 +35,7 @@ class App extends Component {
       return (translate('app.redirectLogin'));
     }
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <Header
             onChange={l => store.dispatch(setActiveLanguage(l))}
