@@ -8,6 +8,7 @@ import './common/stylesheets/styles.css';
 
 import { App, store } from './app';
 import { availableLanguages, currentLanguage, loadTranslations } from './i18n';
+import { unregisterServiceWorker } from './common/service.helper';
 
 // eslint-disable-next-line
 store.dispatch(initialize(availableLanguages, { defaultLanguage: currentLanguage, missingTranslationMsg: '${key}' }));
@@ -19,3 +20,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+unregisterServiceWorker();

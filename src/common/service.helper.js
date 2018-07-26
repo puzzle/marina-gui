@@ -66,3 +66,11 @@ export function getValueFromInputChangeEvent(event) {
       return target.value;
   }
 }
+
+export function unregisterServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then((registration) => {
+      registration.unregister();
+    });
+  }
+}
