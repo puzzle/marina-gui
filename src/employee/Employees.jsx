@@ -10,6 +10,7 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
 import { formatCurrency } from '../common/number.helper';
+import { employeeService } from './index';
 
 class Employees extends React.Component {
   constructor(props) {
@@ -58,10 +59,20 @@ function getColumnDefinitions(translate) {
   }, {
     Header: translate('employee.agreement.text'),
     accessor: 'agreement',
-    Cell: row => <FontAwesomeIcon icon={row.value !== null ? faCheckCircle : faBan} />,
+    Cell: row => (
+      <div>
+        <FontAwesomeIcon icon={row.value !== null ? faCheckCircle : faBan} />
+        {row.value !== null &&
+        <a href={employeeService.getAgreementUrl(row.original.id)}>
+          &nbsp; &nbsp;{translate('app.download')}
+        </a>
+        }
+      </div>
+    ),
     Footer: (row) => {
       const total = _.sumBy(row.data, d => (d.agreement !== null ? 1 : 0));
-      return (<span><strong>{translate('employee.agreement.total')}</strong> {total}</span>);
+      return (
+        <span><strong>{translate('employee.agreement.total')}</strong> {total}</span>);
     },
   }, {
     id: 'amountChf',
@@ -70,7 +81,8 @@ function getColumnDefinitions(translate) {
     Cell: row => (row.value !== null ? ` CHF ${formatCurrency(row.value)}` : '-'),
     Footer: (row) => {
       const total = _.sumBy(row.data, 'amountChf') || 0;
-      return (<span><strong>{translate('employee.agreement.total')}</strong> CHF {formatCurrency(total)}</span>);
+      return (
+        <span><strong>{translate('employee.agreement.total')}</strong> CHF {formatCurrency(total)}</span>);
     },
   }, {
     id: 'address',

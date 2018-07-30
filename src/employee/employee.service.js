@@ -14,6 +14,7 @@ export const employeeService = {
   getEmployees,
   saveEmployee,
   uploadFile,
+  getAgreementUrl,
 };
 
 function getEmployee(id) {
@@ -56,4 +57,11 @@ function saveEmployee(employee) {
 function uploadFile(employeeId, file) {
   return fetch(url(`/employees/${employeeId}/agreement`), makeMultipart('POST', { file }))
     .then(() => getEmployee(employeeId));
+}
+
+function getAgreementUrl(employeeId) {
+  if (employeeId === undefined) {
+    return url('/employees/user/agreement');
+  }
+  return url(`/employees/${employeeId}/agreement`);
 }

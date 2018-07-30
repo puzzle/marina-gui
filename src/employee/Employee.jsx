@@ -13,6 +13,7 @@ import {
 import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
 import { getValueFromInputChangeEvent } from '../common/service.helper';
+import { employeeService } from './index';
 
 class Employee extends React.Component {
   constructor(props) {
@@ -142,7 +143,15 @@ class Employee extends React.Component {
           {this.state.id !== null &&
           <Col md={4}>
             <form onSubmit={this.handleUpload}>
-              <h2>{translate('employee.agreement.current')}: {translate(`employee.agreement.${employee && !!employee.agreement}`)}</h2>
+              <h2>
+                {translate('employee.agreement.current')}:&nbsp;
+                {translate(`employee.agreement.${employee && !!employee.agreement}`)}
+                {employee && !!employee.agreement &&
+                <a href={employeeService.getAgreementUrl(employee.id)}>
+                  &nbsp;{translate('app.download')}
+                </a>
+                }
+              </h2>
               <FormGroup
                 controlId="agreementFile"
                 validationState={this.getValidationState('agreementFile')}

@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Marina",
-    "redirectLogin": "Loading..."
+    "redirectLogin": "Loading...",
+    "download": "download"
   },
   "dashboard": {
     "title": "Dashboard",
