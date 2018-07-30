@@ -28,7 +28,8 @@ pipeline {
       steps {
         sh """#!/bin/bash +x
              source \${HOME}/.nvm/nvm.sh
-             nvm install 8
+             nvm install 8.11.3
+             nvm use --delete-prefix v8.11.3
              which node
              node --version
              which yarn
