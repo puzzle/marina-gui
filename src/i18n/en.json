@@ -13,9 +13,10 @@
     "userSettings": "User Settings",
     "logout": "Logout",
     "employees": "Employees",
-    "editCreateEmployee": "Edit/create employee"
+    "payment": "Payment"
   },
   "employee": {
+    "editCreateEmployee": "Edit/create employee",
     "firstName": "First name",
     "lastName": "Last name",
     "username": "Username",
@@ -31,13 +32,47 @@
       "percentage": "Percent of monthly gross salary",
       "zeroPercent": "0% (no Bitcoin payment)",
       "address": "Recipient Bitcoin address",
-      "amountChf": "Selected amount"
+      "amountChf": "Selected payment amount"
     },
     "agreementFile": "Upload new agreement",
     "addManually": "Add manually",
     "bruttoSalary": "Monthly gross salary",
     "save": "Save",
     "upload": "Upload"
+  },
+  "payment": {
+    "title": "Payment",
+    "privateKey": "Private key (WIF)",
+    "exchangeRate": "Exchange rate (CHF per Bitcoin)",
+    "send": "Send transaction to network",
+    "mempoolStatistics": "Mempool-Statistik",
+    "fee": "Transaction fee. Current network utilization: ",
+    "feeRates": {
+      "0.5": "0.5 satoshi/Byte (very cheap)",
+      "1": "1 satoshi/Byte (default)",
+      "2": "2 satoshi/Byte",
+      "3": "3 satoshi/Byte",
+      "5": "5 satoshi/Byte",
+      "10": "10 satoshi/Byte (kind of expensive, high traffic)",
+      "20": "20 satoshi/Byte",
+      "30": "30 satoshi/Byte",
+      "50": "50 satoshi/Byte",
+      "100": "100 satoshi/Byte (expensive, very high traffic)",
+      "200": "200 satoshi/Byte",
+      "300": "300 satoshi/Byte",
+      "500": "500 satoshi/Byte (very expensive, maximum traffic)"
+    },
+    "pay": "Pay",
+    "recipients": "Recipients",
+    "balance": "Balance",
+    "confirmations": "Confirmations",
+    "paymentSatoshis": "Payment in Satoshis",
+    "summary": "Summary",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "totalFee": "Fee",
+    "txSize": "Tx size",
+    "txId": "Tx ID"
   },
   "save": {
     "success": "Saved successfully"

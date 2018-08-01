@@ -13,9 +13,10 @@ import Header from '../header/Header';
 import UserSettings from '../user-settings/UserSettings';
 import Dashboard from '../dashboard/Dashboard';
 import Employees from '../employee/Employees';
+import Employee from '../employee/Employee';
+import Payment from '../payment/Payment';
 
 import './App.css';
-import Employee from '../employee/Employee';
 
 class App extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class App extends Component {
               <Route path="/user-settings" component={UserSettings} />
               <Route path="/employees" component={Employees} />
               <Route path="/employee/:id" component={Employee} />
+              <Route path="/payment" component={Payment} />
             </Switch>
           </div>
         </div>

@@ -21,6 +21,11 @@ const Navigation = ({ translate, user, userEmployee }) => (
             {translate('navigation.employees')}
           </NavItem>
           }
+          {user && user.authorities && user.authorities.includes('ROLE_ADMIN') &&
+          <NavItem to="/payment">
+            {translate('navigation.payment')}
+          </NavItem>
+          }
         </ul>
       </div>
     </div>

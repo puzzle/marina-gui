@@ -99,7 +99,7 @@ class Employee extends React.Component {
     const { translate, employee } = this.props;
     return (
       <div>
-        <h1>{translate('navigation.editCreateEmployee')}</h1>
+        <h1>{translate('employee.editCreateEmployee')}</h1>
         <Row>
           <Col md={4}>
             <form onSubmit={this.handleSubmit}>

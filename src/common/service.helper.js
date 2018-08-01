@@ -1,5 +1,10 @@
 import { authenticationService } from '../auth';
 
+export const MAINNET_EXPLORER_URL = 'https://blockexplorer.com';
+export const TESTNET_EXPLORER_URL = 'https://testnet.blockexplorer.com';
+export const MAINNET_API_URL = 'https://blockexplorer.com/api';
+export const TESTNET_API_URL = 'https://testnet.blockexplorer.com/api';
+
 export function handleResponse(response) {
   if (!response.ok) {
     return Promise.reject(response.statusText);
@@ -39,6 +44,17 @@ export function makeRequestOptions(method, obj = {}) {
   };
 }
 
+export function makeRequestOptionsExternal(method, obj = {}) {
+  return {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'omit',
+    mode: 'cors',
+    redirect: 'error',
+    ...obj,
+  };
+}
+
 export function makeMultipart(method, params = {}) {
   const formData = new FormData();
   Object.getOwnPropertyNames(params).forEach((name) => {
@@ -73,4 +89,25 @@ export function unregisterServiceWorker() {
       registration.unregister();
     });
   }
+}
+
+export function isProd() {
+  return window.location.hostname === 'marina.puzzle.ch';
+}
+
+export function getApiUrl() {
+  return isProd() ? MAINNET_API_URL : TESTNET_API_URL;
+}
+
+export function getExplorerUrl() {
+  return isProd() ? MAINNET_EXPLORER_URL : TESTNET_EXPLORER_URL;
+}
+
+export function getUtxosForAddress(address) {
+  return fetch(`${getApiUrl()}/addrs/${address}/utxo?noCache=1`, makeRequestOptionsExternal('GET'))
+    .then(handleResponse);
+}
+
+export function getExplorerTxUrl(tx) {
+  return `${getExplorerUrl()}/tx/${tx}`;
 }

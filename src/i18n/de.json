@@ -13,9 +13,10 @@
     "userSettings": "Benutzereinstellungen",
     "logout": "Logout",
     "employees": "Mitarbeiter",
-    "editCreateEmployee": "Mitarbeiter bearbeiten/erstellen"
+    "payment": "Auszahlung"
   },
   "employee": {
+    "editCreateEmployee": "Mitarbeiter bearbeiten/erstellen",
     "firstName": "Vorname",
     "lastName": "Nachname",
     "username": "Username",
@@ -38,6 +39,40 @@
     "bruttoSalary": "Brutto-Monatslohn",
     "save": "Speichern",
     "upload": "Hochladen"
+  },
+  "payment": {
+    "title": "Auszahlung",
+    "privateKey": "Privater Schlüssel (WIF)",
+    "exchangeRate": "Wechselkurs (CHF pro Bitcoin)",
+    "send": "Transaktion an Netzwerk senden",
+    "mempoolStatistics": "Mempool-Statistik",
+    "fee": "Transaktionsgebühr. Aktuelle Netzwerkauslastung: ",
+    "feeRates": {
+      "0.5": "0.5 satoshi/Byte (sehr günstig)",
+      "1": "1 satoshi/Byte (default)",
+      "2": "2 satoshi/Byte",
+      "3": "3 satoshi/Byte",
+      "5": "5 satoshi/Byte",
+      "10": "10 satoshi/Byte (eher teuer, höhere Auslastung)",
+      "20": "20 satoshi/Byte",
+      "30": "30 satoshi/Byte",
+      "50": "50 satoshi/Byte",
+      "100": "100 satoshi/Byte (teuer, sehr hohe Auslastung)",
+      "200": "200 satoshi/Byte",
+      "300": "300 satoshi/Byte",
+      "500": "500 satoshi/Byte (sehr teuer, maximale Auslastung)"
+    },
+    "pay": "Auszahlen",
+    "recipients": "Empfänger",
+    "balance": "Guthaben",
+    "confirmations": "Bestätigungen",
+    "paymentSatoshis": "Auszahlungsbetrag in Satoshis",
+    "summary": "Zusammenfassung",
+    "inputs": "Inputs",
+    "outputs": "Outputs",
+    "totalFee": "Gebühr",
+    "txSize": "Tx-Grösse",
+    "txId": "Tx-ID"
   },
   "save": {
     "success": "Erfolgreich gespeichert"
