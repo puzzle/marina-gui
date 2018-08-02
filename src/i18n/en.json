@@ -33,7 +33,8 @@
       "percentage": "Percent of monthly gross salary",
       "zeroPercent": "0% (no Bitcoin payment)",
       "address": "Recipient Bitcoin address",
-      "amountChf": "Selected payment amount"
+      "amountChf": "Selected payment amount",
+      "isLocked": "Starting at the 11. day of each month, up to and including the 25th, these settings can't be changed!"
     },
     "agreementFile": "Upload new agreement",
     "addManually": "Add manually",

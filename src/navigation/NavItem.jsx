@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-class NavItem extends Component {
+class NavItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,6 +9,7 @@ class NavItem extends Component {
       location: props.location,
     };
   }
+
   componentWillMount() {
     this.unlisten = this.props.history.listen((location) => {
       this.setState({ location });

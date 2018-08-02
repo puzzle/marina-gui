@@ -17,7 +17,7 @@ function getConfiguration() {
 function saveConfiguration(configuration) {
   if (configuration.id !== null) {
     return fetch(url(`/configuration/${configuration.id}`), makeRequestOptions('PUT', { body: JSON.stringify(configuration) }))
-      .then(() => getConfiguration());
+      .then(handleResponse);
   }
   throw new Error('configuration id cannot be null!');
 }

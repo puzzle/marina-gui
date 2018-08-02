@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import { formatCurrency } from '../common/number.helper';
 import { employeeService } from '../employee';
 import MonthlyPayouts from '../employee/MonthlyPayouts';
 
-class Dashboard extends Component {
+class Dashboard extends React.Component {
   render() {
     const { translate, user, userEmployee } = this.props;
     return (

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router-dom';
 import { getTranslate, setActiveLanguage } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import 'react-table/react-table.css';
@@ -18,7 +18,7 @@ import Payment from '../payment/Payment';
 
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 

@@ -10,6 +10,7 @@ import {
   FormGroup,
   Row,
 } from 'react-bootstrap';
+import * as moment from 'moment';
 import { getValueFromInputChangeEvent } from '../common/service.helper';
 import { configurationActions } from '../employee/configuration.actions';
 import {
@@ -18,19 +19,30 @@ import {
   formatCurrency,
 } from '../common/number.helper';
 import { bitcoinAddressValid } from '../common/bitcoin.helper';
+import { alertActions } from '../app';
+
+export const DATE_LOCK_START = 11;
+export const DATE_LOCK_END = 25;
 
 class UserSettings extends React.Component {
   constructor(props) {
     super(props);
 
+    const dayOfMonth = moment().date();
+    const isLocked = dayOfMonth >= DATE_LOCK_START && dayOfMonth <= DATE_LOCK_END;
+
     this.state = {
       percentage: 0,
       address: '',
       addressValid: false,
+      isLocked,
     };
 
     const { dispatch } = this.props;
     dispatch(configurationActions.getConfiguration());
+    if (isLocked) {
+      dispatch(alertActions.error('employee.currentConfiguration.isLocked'));
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -94,6 +106,7 @@ class UserSettings extends React.Component {
                   value={this.state.percentage}
                   placeholder={translate('employee.currentConfiguration.percentage')}
                   onChange={this.handleInputChange}
+                  disabled={this.state.isLocked}
                 >
                   <option value="0">
                     {translate('employee.currentConfiguration.zeroPercent')}
@@ -114,11 +127,12 @@ class UserSettings extends React.Component {
                   value={this.state.address}
                   placeholder={translate('employee.currentConfiguration.address')}
                   onChange={this.handleInputChange}
+                  disabled={this.state.isLocked}
                 />
               </FormGroup>
             </form>
             <ButtonToolbar style={{ marginTop: '20px' }}>
-              <Button onClick={this.handleSubmit}>
+              <Button onClick={this.handleSubmit} disabled={this.state.isLocked}>
                 {translate('employee.save')}
               </Button>
             </ButtonToolbar>

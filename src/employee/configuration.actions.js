@@ -51,9 +51,11 @@ function saveConfiguration(configuration) {
 
     configurationService.saveConfiguration(configuration)
       .then(
-        updatedConfiguration => dispatch(success(updatedConfiguration)),
-        error => dispatch(failure(error)),
-      );
+        (updatedConfiguration) => {
+          dispatch(success(updatedConfiguration));
+          dispatch(getConfiguration());
+        },
+        error => dispatch(failure(error)));
   };
 
   function request() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import {
@@ -19,7 +19,8 @@ import {
   bitcoinAddressValid,
   bitcoinPrivateKeyValid,
   FEE_RATES,
-  getAddressesFromPrivKey, getExplorerAddrUrl,
+  getAddressesFromPrivKey,
+  getExplorerAddrUrl,
   getExplorerTxUrl,
   getUtxosForAddress,
   publishTx,
@@ -27,13 +28,14 @@ import {
 } from '../common/bitcoin.helper';
 import {
   buildTx,
-  calculatePaymentAmount, INITIAL_STATE,
+  calculatePaymentAmount,
+  INITIAL_STATE,
   readyToBuildTx,
 } from './payment.helper';
 import { alertActions } from '../app';
 import { employeeService } from '../employee';
 
-class Payment extends Component {
+class Payment extends React.Component {
   constructor(props) {
     super(props);
 

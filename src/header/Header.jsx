@@ -35,7 +35,12 @@ class Header extends React.Component {
           <div className="container-fluid">
             <div className="navbar-header">
               <div className="navbar-brand">
-                <img src="/icons/safari-pinned-tab.svg" alt="Logo" width="41" height="40" />
+                <img
+                  src="/icons/safari-pinned-tab.svg"
+                  alt="Logo"
+                  width="41"
+                  height="40"
+                />
                 {translate('app.title')}
               </div>
             </div>
@@ -49,7 +54,11 @@ class Header extends React.Component {
               <li className="navbar-form">
                 <div className="form-group">
                   <FontAwesomeIcon icon={faGlobe} className="inline-icon" />
-                  <select onChange={createOnChangeHandler(onChange)} value={currentLanguage} className="form-control">
+                  <select
+                    onChange={createOnChangeHandler(onChange)}
+                    value={currentLanguage}
+                    className="form-control"
+                  >
                     {availableLanguages.map((item, index) =>
                       (
                         <option key={index}>
