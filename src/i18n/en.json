@@ -2,7 +2,9 @@
   "app": {
     "title": "Marina",
     "redirectLogin": "Loading...",
-    "download": "download"
+    "download": "download",
+    "total": "Total",
+    "avg": "Average"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -25,8 +27,7 @@
       "text": "Agreement",
       "current": "Current agreement",
       "true": "OK",
-      "false": "Not uploaded yet",
-      "total": "Total"
+      "false": "Not uploaded yet"
     },
     "currentConfiguration": {
       "percentage": "Percent of monthly gross salary",
@@ -74,7 +75,8 @@
     "outputs": "Outputs",
     "fee": "Fee",
     "txSize": "Tx size",
-    "txId": "Tx ID"
+    "txId": "Tx ID",
+    "success": "Die Transaktion wurde erfolgreich übermittelt!"
   },
   "payout": {
     "date": "Payout date",

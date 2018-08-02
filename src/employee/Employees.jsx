@@ -26,11 +26,12 @@ class Employees extends React.Component {
 
     const data = employees || [];
     const columns = getColumnDefinitions(translate);
+    const defaultSorted = [{ id: 'lastName', desc: false }];
 
     return (
       <div>
         <h1>{translate('navigation.employees')}</h1>
-        <ReactTable data={data} columns={columns} minRows={0} />
+        <ReactTable data={data} columns={columns} minRows={0} defaultSorted={defaultSorted} />
         <ButtonToolbar style={{ marginTop: '20px' }}>
           <Link to="/employee/new">
             <Button>
@@ -73,7 +74,7 @@ function getColumnDefinitions(translate) {
     Footer: (row) => {
       const total = _.sumBy(row.data, d => (d.agreement !== null ? 1 : 0));
       return (
-        <span><strong>{translate('employee.agreement.total')}</strong> {total}</span>);
+        <span><strong>{translate('app.total')}</strong> {total}</span>);
     },
   }, {
     id: 'amountChf',
@@ -83,7 +84,7 @@ function getColumnDefinitions(translate) {
     Footer: (row) => {
       const total = _.sumBy(row.data, 'amountChf') || 0;
       return (
-        <span><strong>{translate('employee.agreement.total')}</strong> CHF {formatCurrency(total)}</span>);
+        <span><strong>{translate('app.total')}</strong> CHF {formatCurrency(total)}</span>);
     },
   }, {
     id: 'address',

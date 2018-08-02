@@ -27,7 +27,7 @@ import {
 } from '../common/bitcoin.helper';
 import {
   buildTx,
-  calculatePaymentAmount,
+  calculatePaymentAmount, INITIAL_STATE,
   readyToBuildTx,
 } from './payment.helper';
 import { alertActions } from '../app';
@@ -37,18 +37,7 @@ class Payment extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      privateKey: '',
-      exchangeRate: 0,
-      changeAddress: '',
-      feeRate: 1,
-      employees: null,
-      utxoSet: null,
-      tx: null,
-      privateKeyValid: false,
-      exchangeRateValid: false,
-      changeAddressValid: false,
-    };
+    this.state = Object.assign({}, INITIAL_STATE);
 
     const { dispatch } = this.props;
     dispatch(employeeActions.getEmployees());
@@ -72,9 +61,8 @@ class Payment extends Component {
   handleSubmit() {
     const { employees } = this.state;
     const { dispatch } = this.props;
-    console.log(this.state);
-    publishTx(this.state.tx).then((response) => {
-      console.log(response);
+    dispatch(alertActions.clear());
+    publishTx(this.state.tx).then(() => {
       const payouts = employees
         .filter(e => e.selected)
         .map(e => ({
@@ -84,9 +72,10 @@ class Payment extends Component {
           rateChf: this.state.exchangeRate,
           publicAddress: e.currentConfiguration.currentAddress,
         }));
-      return employeeService.savePayouts(payouts).then((response2) => {
-        console.log(response2);
+      return employeeService.savePayouts(payouts).then(() => {
         dispatch(alertActions.success('payment.success'));
+        this.setState(Object.assign({}, INITIAL_STATE));
+        dispatch(employeeActions.getEmployees());
       });
     }, error => dispatch(alertActions.error(error)));
   }

@@ -11,6 +11,19 @@ import {
   SATOSHIS_IN_BTC,
 } from '../common/bitcoin.helper';
 
+export const INITIAL_STATE = {
+  privateKey: '',
+  exchangeRate: 0,
+  changeAddress: '',
+  feeRate: 1,
+  employees: null,
+  utxoSet: null,
+  tx: null,
+  privateKeyValid: false,
+  exchangeRateValid: false,
+  changeAddressValid: false,
+};
+
 export function readyToBuildTx(state) {
   return state.privateKeyValid &&
     state.exchangeRateValid &&
