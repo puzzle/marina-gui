@@ -13,11 +13,11 @@ import {
 import { getValueFromInputChangeEvent } from '../common/service.helper';
 import { configurationActions } from '../employee/configuration.actions';
 import {
-  bitcoinAddressValid,
   calculateAmount,
   calculatePercentage,
   formatCurrency,
 } from '../common/number.helper';
+import { bitcoinAddressValid } from '../common/bitcoin.helper';
 
 class UserSettings extends React.Component {
   constructor(props) {

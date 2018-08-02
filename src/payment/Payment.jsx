@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
-import * as _ from 'lodash';
 import {
   Button,
   ButtonToolbar,
@@ -14,24 +13,25 @@ import {
   Table,
 } from 'react-bootstrap';
 import { employeeActions } from '../employee/employee.actions';
+import { getValueFromInputChangeEvent } from '../common/service.helper';
+import { formatCurrency, formatNumber } from '../common/number.helper';
 import {
+  bitcoinAddressValid,
+  bitcoinPrivateKeyValid,
+  FEE_RATES,
+  getAddressesFromPrivKey, getExplorerAddrUrl,
   getExplorerTxUrl,
   getUtxosForAddress,
-  getValueFromInputChangeEvent,
-} from '../common/service.helper';
-import {
-  bitcoinPrivateKeyValid,
-  formatCurrency,
-  formatNumber,
-  getAddressesFromPrivKey,
+  publishTx,
   SATOSHIS_IN_BTC,
-} from '../common/number.helper';
-
-export const FEE_RATES = [
-  0.5, 1, 2, 3, 5,
-  10, 20, 30, 50,
-  100, 200, 300, 500,
-];
+} from '../common/bitcoin.helper';
+import {
+  buildTx,
+  calculatePaymentAmount,
+  readyToBuildTx,
+} from './payment.helper';
+import { alertActions } from '../app';
+import { employeeService } from '../employee';
 
 class Payment extends Component {
   constructor(props) {
@@ -40,11 +40,14 @@ class Payment extends Component {
     this.state = {
       privateKey: '',
       exchangeRate: 0,
-      fee: 1,
+      changeAddress: '',
+      feeRate: 1,
       employees: null,
       utxoSet: null,
+      tx: null,
       privateKeyValid: false,
       exchangeRateValid: false,
+      changeAddressValid: false,
     };
 
     const { dispatch } = this.props;
@@ -52,11 +55,13 @@ class Payment extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.calculatePaymentAmount = this.calculatePaymentAmount.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     let { employees } = nextProps;
+    if (!employees) {
+      return;
+    }
     employees = employees.map(e => ({
       selected: true,
       ...e,
@@ -65,62 +70,99 @@ class Payment extends Component {
   }
 
   handleSubmit() {
+    const { employees } = this.state;
+    const { dispatch } = this.props;
     console.log(this.state);
+    publishTx(this.state.tx).then((response) => {
+      console.log(response);
+      const payouts = employees
+        .filter(e => e.selected)
+        .map(e => ({
+          employeeId: e.id,
+          amountChf: e.currentConfiguration.amountChf,
+          amountBtc: calculatePaymentAmount(this.state.exchangeRate, e),
+          rateChf: this.state.exchangeRate,
+          publicAddress: e.currentConfiguration.currentAddress,
+        }));
+      return employeeService.savePayouts(payouts).then((response2) => {
+        console.log(response2);
+        dispatch(alertActions.success('payment.success'));
+      });
+    }, error => dispatch(alertActions.error(error)));
   }
 
   handleInputChange(event) {
     const { name } = event.target;
     const value = getValueFromInputChangeEvent(event);
-    let { privateKeyValid, exchangeRateValid } = this.state;
+    const { employees, utxoSet } = this.state;
+    let { privateKeyValid, exchangeRateValid, changeAddressValid } = this.state;
     if (name === 'privateKey') {
       privateKeyValid = bitcoinPrivateKeyValid(value);
       if (privateKeyValid) {
-        const addrs = getAddressesFromPrivKey(value).join(',');
-        getUtxosForAddress(addrs).then((utxoSet) => {
-          utxoSet.forEach(u => (u.selected = true));
-          this.setState({ utxoSet });
+        const addrs = getAddressesFromPrivKey(value);
+        getUtxosForAddress(addrs).then((utxoSetNew) => {
+          utxoSetNew.forEach((utxo) => {
+            if (utxo.confirmations > 0) {
+              utxo.selected = true;
+            }
+          });
+          const newState = Object.assign({}, this.state, {
+            utxoSet: utxoSetNew,
+          });
+          this.setState({
+            ...newState,
+            tx: buildTx(newState, utxoSetNew, employees),
+          });
         });
       }
     }
     if (name === 'exchangeRate') {
       exchangeRateValid = (value > 0);
     }
-    this.setState({ [name]: value, privateKeyValid, exchangeRateValid });
-  }
-
-  calculatePaymentAmount(employee) {
-    const btc = (employee.currentConfiguration.amountChf / this.state.exchangeRate);
-    return formatNumber(Math.ceil(btc * SATOSHIS_IN_BTC));
+    if (name === 'changeAddress') {
+      changeAddressValid = bitcoinAddressValid(value);
+    }
+    const newState = Object.assign({}, this.state, {
+      [name]: value,
+      privateKeyValid,
+      exchangeRateValid,
+      changeAddressValid,
+    });
+    this.setState({
+      ...newState,
+      tx: buildTx(newState, utxoSet, employees),
+    });
   }
 
   toggleUtxo(idx) {
-    const { utxoSet } = this.state;
+    const { utxoSet, employees } = this.state;
+    utxoSet.forEach((u, i) => {
+      if (i === idx) {
+        u.selected = !u.selected;
+      }
+      return u;
+    });
     this.setState({
-      utxoSet: utxoSet.map((u, i) => {
-        if (i === idx) {
-          u.selected = !u.selected;
-        }
-        return u;
-      }),
+      tx: buildTx(this.state, utxoSet, employees),
+      utxoSet,
     });
   }
 
   toggleEmployee(idx) {
-    const { employees } = this.state;
+    const { employees, utxoSet } = this.state;
+    employees.forEach((u, i) => {
+      if (i === idx) {
+        u.selected = !u.selected;
+      }
+      return u;
+    });
     this.setState({
-      employees: employees.map((u, i) => {
-        if (i === idx) {
-          u.selected = !u.selected;
-        }
-        return u;
-      }),
+      tx: buildTx(this.state, utxoSet, employees),
+      employees,
     });
   }
 
   render() {
-    // n3RxX9N7cdUuMTZ32rfMdGYKaR2czkpVoH
-    // 2MsVeLrvm5oqJk2wVVfxGyWiZFGfPTaEQer
-    // cTkM2RkhKxmWN9spK2thhvqBfUAm1kUnKYxAWqwXhKxtUkuhCfAw
     const { translate } = this.props;
     const { employees } = this.state;
     return (
@@ -155,9 +197,22 @@ class Payment extends Component {
                   onChange={this.handleInputChange}
                 />
               </FormGroup>
-              <FormGroup controlId="fee">
+              <FormGroup
+                controlId="changeAddress"
+                validationState={this.state.changeAddressValid ? 'success' : 'error'}
+              >
+                <ControlLabel>{translate('payment.changeAddress')}</ControlLabel>
+                <FormControl
+                  type="text"
+                  name="changeAddress"
+                  value={this.state.changeAddress}
+                  placeholder={translate('payment.changeAddress')}
+                  onChange={this.handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup controlId="feeRate">
                 <ControlLabel>
-                  {translate('payment.fee')}
+                  {translate('payment.feeRate')}
                   <a
                     rel="noopener noreferrer"
                     target="_blank"
@@ -168,9 +223,9 @@ class Payment extends Component {
                 </ControlLabel>
                 <FormControl
                   componentClass="select"
-                  name="fee"
-                  value={this.state.fee}
-                  placeholder={translate('payment.fee')}
+                  name="feeRate"
+                  value={this.state.feeRate}
+                  placeholder={translate('payment.feeRate')}
                   onChange={this.handleInputChange}
                 >
                   {FEE_RATES.map(val => (
@@ -194,7 +249,7 @@ class Payment extends Component {
                   >
                     {utxo.address}
                   </Checkbox>
-                  {translate('payment.txId')}:
+                  {translate('payment.txId')}:&nbsp;
                   <small>
                     <a
                       rel="noopener noreferrer"
@@ -205,11 +260,12 @@ class Payment extends Component {
                     </a> : {utxo.vout}
                   </small>
                   <br />
-                  {translate('payment.balance')}:
+                  {translate('payment.balance')}:&nbsp;
                   {formatNumber(utxo.satoshis)} sat
                   / {utxo.satoshis / SATOSHIS_IN_BTC} BTC
                   <br />
-                  {translate('payment.confirmations')}: {utxo.confirmations}
+                  {translate('payment.confirmations')}:&nbsp;
+                  {utxo.confirmations}
                 </li>
               ))}
             </ul>
@@ -243,30 +299,62 @@ class Payment extends Component {
                       </td>
                       <td>{emp.username}</td>
                       <td>CHF {formatCurrency(emp.currentConfiguration.amountChf)}</td>
-                      <td>{emp.currentConfiguration.currentAddress}</td>
-                      <td>{this.state.exchangeRate ? this.calculatePaymentAmount(emp) : '0'}</td>
+                      <td>
+                        <a
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          href={getExplorerAddrUrl(emp.currentConfiguration.currentAddress)}
+                        >
+                          {emp.currentConfiguration.currentAddress}
+                        </a>
+                      </td>
+                      <td>{this.state.exchangeRate ? formatNumber(calculatePaymentAmount(this.state.exchangeRate, emp)) : '0'}</td>
                     </tr>
                   ))}
               </tbody>
             </Table>
           </Col>
         </Row>
-        {this.state.privateKeyValid && this.state.utxoSet && this.state.utxoSet.length && this.state.exchangeRateValid &&
+        {readyToBuildTx(this.state) && this.state.tx &&
         <Row>
-          <Col md={3}>
+          <Col md={4}>
             <h2>{translate('payment.summary')}</h2>
             <Table condensed>
               <tbody>
                 <tr>
-                  <th>{translate('payment.inputs')}</th>
+                  <th>{translate('payment.inputs')} ({this.state.tx.numInputs})</th>
                   <td align="right">
-                    {formatNumber(_.sumBy(this.state.utxoSet.filter(u => u.selected), 'satoshis'))} sat
+                    {formatNumber(this.state.tx.inputSum)} sat
                   </td>
                 </tr>
                 <tr>
-                  <th>{translate('payment.outputs')}</th>
+                  <th>{translate('payment.outputs')} ({this.state.tx.numOutputs})</th>
                   <td align="right">
-                    {formatNumber(_.sumBy(employees.filter(e => e.selected), e => this.calculatePaymentAmount(e)))} sat
+                    {formatNumber(this.state.tx.outputSum)} sat
+                  </td>
+                </tr>
+                <tr>
+                  <th>{translate('payment.fee')}</th>
+                  <td align="right">
+                    {formatNumber(this.state.tx.fee)} sat
+                    ({formatCurrency(this.state.tx.feeRate)} sat/Byte)
+                  </td>
+                </tr>
+                <tr>
+                  <th>{translate('payment.fee')} CHF</th>
+                  <td align="right">
+                    {formatCurrency((this.state.exchangeRate / SATOSHIS_IN_BTC) * this.state.tx.fee)}
+                  </td>
+                </tr>
+                <tr>
+                  <th>{translate('payment.txSize')}</th>
+                  <td align="right">{this.state.tx.toHex().length / 2} Bytes
+                  </td>
+                </tr>
+                <tr>
+                  <th>{translate('payment.txId')}</th>
+                  <td align="right">
+                    <small>{this.state.tx.getHash().reverse().toString('hex')}</small>
                   </td>
                 </tr>
               </tbody>

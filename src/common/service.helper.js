@@ -1,13 +1,8 @@
 import { authenticationService } from '../auth';
 
-export const MAINNET_EXPLORER_URL = 'https://blockexplorer.com';
-export const TESTNET_EXPLORER_URL = 'https://testnet.blockexplorer.com';
-export const MAINNET_API_URL = 'https://blockexplorer.com/api';
-export const TESTNET_API_URL = 'https://testnet.blockexplorer.com/api';
-
 export function handleResponse(response) {
   if (!response.ok) {
-    return Promise.reject(response.statusText);
+    return Promise.reject(response.statusText || response.status);
   }
 
   if (response.status === 201 || response.status === 204) {
@@ -19,6 +14,22 @@ export function handleResponse(response) {
   }
 
   return response.json();
+}
+
+export function handleResponseText(response) {
+  if (!response.ok) {
+    return Promise.reject(response.statusText || response.status);
+  }
+
+  if (response.status === 201 || response.status === 204) {
+    return {};
+  }
+
+  if (response.redirected && response.body.indexOf('<html') >= 0) {
+    authenticationService.redirectToLogin();
+  }
+
+  return response.body;
 }
 
 export function fetchCreatedEntity(response) {
@@ -40,17 +51,6 @@ export function makeRequestOptions(method, obj = {}) {
     credentials: 'include',
     mode: 'cors',
     redirect: 'follow',
-    ...obj,
-  };
-}
-
-export function makeRequestOptionsExternal(method, obj = {}) {
-  return {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'omit',
-    mode: 'cors',
-    redirect: 'error',
     ...obj,
   };
 }
@@ -89,25 +89,4 @@ export function unregisterServiceWorker() {
       registration.unregister();
     });
   }
-}
-
-export function isProd() {
-  return window.location.hostname === 'marina.puzzle.ch';
-}
-
-export function getApiUrl() {
-  return isProd() ? MAINNET_API_URL : TESTNET_API_URL;
-}
-
-export function getExplorerUrl() {
-  return isProd() ? MAINNET_EXPLORER_URL : TESTNET_EXPLORER_URL;
-}
-
-export function getUtxosForAddress(address) {
-  return fetch(`${getApiUrl()}/addrs/${address}/utxo?noCache=1`, makeRequestOptionsExternal('GET'))
-    .then(handleResponse);
-}
-
-export function getExplorerTxUrl(tx) {
-  return `${getExplorerUrl()}/tx/${tx}`;
 }

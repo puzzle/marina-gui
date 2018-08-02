@@ -38,7 +38,8 @@
     "addManually": "Manuell hinzufügen",
     "bruttoSalary": "Brutto-Monatslohn",
     "save": "Speichern",
-    "upload": "Hochladen"
+    "upload": "Hochladen",
+    "payouts": "Auszahlungen"
   },
   "payment": {
     "title": "Auszahlung",
@@ -46,7 +47,7 @@
     "exchangeRate": "Wechselkurs (CHF pro Bitcoin)",
     "send": "Transaktion an Netzwerk senden",
     "mempoolStatistics": "Mempool-Statistik",
-    "fee": "Transaktionsgebühr. Aktuelle Netzwerkauslastung: ",
+    "feeRate": "Transaktionsgebühr. Aktuelle Netzwerkauslastung: ",
     "feeRates": {
       "0.5": "0.5 satoshi/Byte (sehr günstig)",
       "1": "1 satoshi/Byte (default)",
@@ -62,6 +63,7 @@
       "300": "300 satoshi/Byte",
       "500": "500 satoshi/Byte (sehr teuer, maximale Auslastung)"
     },
+    "changeAddress": "Adresse für Restbetrag",
     "pay": "Auszahlen",
     "recipients": "Empfänger",
     "balance": "Guthaben",
@@ -70,9 +72,16 @@
     "summary": "Zusammenfassung",
     "inputs": "Inputs",
     "outputs": "Outputs",
-    "totalFee": "Gebühr",
+    "fee": "Gebühr",
     "txSize": "Tx-Grösse",
     "txId": "Tx-ID"
+  },
+  "payout": {
+    "date": "Auszahlungsdatum",
+    "address": "An Adresse",
+    "rateChf": "Wechselkurs (CHF pro Bitcoin)",
+    "amountChf": "Betrag CHF",
+    "amountBtc": "Betrag BTC"
   },
   "save": {
     "success": "Erfolgreich gespeichert"

@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
 import { getValueFromInputChangeEvent } from '../common/service.helper';
 import { employeeService } from './index';
+import MonthlyPayouts from './MonthlyPayouts';
 
 class Employee extends React.Component {
   constructor(props) {
@@ -173,6 +174,12 @@ class Employee extends React.Component {
           </Col>
           }
         </Row>
+        {employee && employee.monthlyPayouts && employee.monthlyPayouts.length > 0 &&
+        <div>
+          <h3>{translate('employee.payouts')}</h3>
+          <MonthlyPayouts monthlyPayouts={employee.monthlyPayouts} />
+        </div>
+        }
       </div>
     );
   }

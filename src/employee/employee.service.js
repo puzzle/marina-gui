@@ -15,6 +15,7 @@ export const employeeService = {
   saveEmployee,
   uploadFile,
   getAgreementUrl,
+  savePayouts,
 };
 
 function getEmployee(id) {
@@ -64,4 +65,9 @@ function getAgreementUrl(employeeId) {
     return url('/employees/user/agreement');
   }
   return url(`/employees/${employeeId}/agreement`);
+}
+
+function savePayouts(payouts) {
+  return fetch(url('/employees/payouts'), makeRequestOptions('POST', { body: JSON.stringify(payouts) }))
+    .then(handleResponse);
 }

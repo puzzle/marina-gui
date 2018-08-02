@@ -38,7 +38,8 @@
     "addManually": "Add manually",
     "bruttoSalary": "Monthly gross salary",
     "save": "Save",
-    "upload": "Upload"
+    "upload": "Upload",
+    "payouts": "Payouts"
   },
   "payment": {
     "title": "Payment",
@@ -46,7 +47,7 @@
     "exchangeRate": "Exchange rate (CHF per Bitcoin)",
     "send": "Send transaction to network",
     "mempoolStatistics": "Mempool-Statistik",
-    "fee": "Transaction fee. Current network utilization: ",
+    "feeRate": "Transaction fee. Current network utilization: ",
     "feeRates": {
       "0.5": "0.5 satoshi/Byte (very cheap)",
       "1": "1 satoshi/Byte (default)",
@@ -62,6 +63,7 @@
       "300": "300 satoshi/Byte",
       "500": "500 satoshi/Byte (very expensive, maximum traffic)"
     },
+    "changeAddress": "Address for remaining amount",
     "pay": "Pay",
     "recipients": "Recipients",
     "balance": "Balance",
@@ -70,9 +72,16 @@
     "summary": "Summary",
     "inputs": "Inputs",
     "outputs": "Outputs",
-    "totalFee": "Fee",
+    "fee": "Fee",
     "txSize": "Tx size",
     "txId": "Tx ID"
+  },
+  "payout": {
+    "date": "Payout date",
+    "address": "To address",
+    "rateChf": "Exchange rate (CHF per Bitcoin)",
+    "amountChf": "Amount CHF",
+    "amountBtc": "Amount BTC"
   },
   "save": {
     "success": "Saved successfully"

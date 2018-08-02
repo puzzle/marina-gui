@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
 import { formatCurrency } from '../common/number.helper';
 import { employeeService } from './index';
+import { getExplorerAddrUrl } from '../common/bitcoin.helper';
 
 class Employees extends React.Component {
   constructor(props) {
@@ -87,7 +88,16 @@ function getColumnDefinitions(translate) {
   }, {
     id: 'address',
     Header: translate('employee.currentConfiguration.address'),
-    accessor: e => (e.currentConfiguration ? e.currentConfiguration.currentAddress : '-'),
+    accessor: e => (e.currentConfiguration ? e.currentConfiguration.currentAddress : null),
+    Cell: row => (row.value === null ? '-' : (
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href={getExplorerAddrUrl(row.value)}
+      >
+        {row.value}
+      </a>
+    )),
   }];
 }
 
