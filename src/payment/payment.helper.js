@@ -28,10 +28,13 @@ export function readyToBuildTx(state) {
   return state.privateKeyValid &&
     state.exchangeRateValid &&
     state.changeAddressValid &&
-    state.utxoSet && state.utxoSet.length;
+    state.utxoSet && state.utxoSet.length > 0;
 }
 
 export function calculatePaymentAmount(exchangeRate, employee) {
+  if (!employee || !employee.currentConfiguration) {
+    return 0;
+  }
   const btc = (employee.currentConfiguration.amountChf / exchangeRate);
   return Math.ceil(btc * SATOSHIS_IN_BTC);
 }

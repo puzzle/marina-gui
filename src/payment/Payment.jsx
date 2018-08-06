@@ -53,10 +53,12 @@ class Payment extends React.Component {
     if (!employees) {
       return;
     }
-    employees = employees.map(e => ({
-      selected: true,
-      ...e,
-    }));
+    employees = employees
+      .filter(emp => emp && emp.agreement && emp.currentConfiguration && emp.currentConfiguration.amountChf > 0)
+      .map(e => ({
+        selected: true,
+        ...e,
+      }));
     this.setState({ employees });
   }
 
@@ -278,7 +280,6 @@ class Payment extends React.Component {
               </thead>
               <tbody>
                 {employees && employees
-                  .filter(emp => emp && emp.agreement && emp.currentConfiguration && emp.currentConfiguration.amountChf > 0)
                   .map((emp, idx) => (
                     <tr key={emp.id}>
                       <td>
