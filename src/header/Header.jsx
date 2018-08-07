@@ -1,6 +1,7 @@
 import React from 'react';
 import { getActiveLanguage, getTranslate } from 'react-localize-redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 import faGlobe from '@fortawesome/fontawesome-free-solid/faGlobe';
@@ -46,10 +47,10 @@ class Header extends React.Component {
             </div>
             <ul className="nav navbar-nav navbar-right">
               <li className="navbar-user">
-                <a href="/employees/settings">
+                <Link to="/">
                   <FontAwesomeIcon icon={faUser} className="inline-icon" />
                   {user ? user.username : ''}
-                </a>
+                </Link>
               </li>
               <li className="navbar-form">
                 <div className="form-group">
