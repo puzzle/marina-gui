@@ -7,7 +7,7 @@ import {
 } from 'bitcoinjs-lib';
 import { handleResponse, handleResponseText } from './service.helper';
 
-export const MAINNET_EXPLORER_URL = 'https://btc.com.com';
+export const MAINNET_EXPLORER_URL = 'https://btc.com';
 export const TESTNET_EXPLORER_URL = 'https://tchain.btc.com';
 export const MAINNET_API_URL = 'https://blockexplorer.com/api';
 export const TESTNET_API_URL = 'https://testnet.blockexplorer.com/api';
