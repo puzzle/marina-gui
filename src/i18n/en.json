@@ -4,7 +4,8 @@
     "redirectLogin": "Loading...",
     "download": "download",
     "total": "Total",
-    "avg": "Average"
+    "avg": "Average",
+    "logout": "Logout (SSO)"
   },
   "dashboard": {
     "title": "Dashboard",

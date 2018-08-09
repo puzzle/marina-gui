@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 import faGlobe from '@fortawesome/fontawesome-free-solid/faGlobe';
+import faSignOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 
 import Navigation from '../navigation/Navigation';
 import { availableLanguages } from '../i18n';
@@ -29,7 +30,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { currentLanguage, onChange, translate, user } = this.props;
+    const { currentLanguage, onChange, translate, user, dispatch } = this.props;
     return (
       <header>
         <div className="navbar navbar-default" id="headerbar" role="navigation">
@@ -68,6 +69,12 @@ class Header extends React.Component {
                       ))}
                   </select>
                 </div>
+              </li>
+              <li>
+                <button className="link" onClick={() => dispatch(authenticationActions.logout())}>
+                  <FontAwesomeIcon icon={faSignOut} className="inline-icon" />
+                  {translate('app.logout')}
+                </button>
               </li>
             </ul>
           </div>

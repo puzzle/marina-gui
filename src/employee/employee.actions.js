@@ -3,7 +3,6 @@ import { employeeService } from './employee.service';
 export const employeeConstants = {
   CHECK_EMPLOYEE_REQUEST: 'CHECK_EMPLOYEE_REQUEST',
   CHECK_EMPLOYEE_SUCCESS: 'CHECK_EMPLOYEE_SUCCESS',
-  CHECK_EMPLOYEE_FAILURE: 'CHECK_EMPLOYEE_FAILURE',
 
   MAKE_EMPLOYEE_REQUEST: 'MAKE_EMPLOYEE_REQUEST',
   MAKE_EMPLOYEE_SUCCESS: 'MAKE_EMPLOYEE_SUCCESS',
@@ -28,7 +27,6 @@ export const employeeConstants = {
 
 export const employeeActions = {
   checkEmployee,
-  makeEmployee,
   getEmployees,
   getEmployee,
   saveEmployee,
@@ -42,10 +40,7 @@ function checkEmployee() {
     employeeService.getCurrentEmployee()
       .then(
         userEmployee => dispatch(success(userEmployee)),
-        (error) => {
-          dispatch(failure(error));
-          dispatch(makeEmployee());
-        },
+        () => dispatch(makeEmployee()),
       );
   };
 
@@ -55,10 +50,6 @@ function checkEmployee() {
 
   function success(userEmployee) {
     return { type: employeeConstants.CHECK_EMPLOYEE_SUCCESS, userEmployee };
-  }
-
-  function failure(error) {
-    return { type: employeeConstants.CHECK_EMPLOYEE_FAILURE, error };
   }
 }
 

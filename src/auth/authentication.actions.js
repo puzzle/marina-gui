@@ -45,5 +45,9 @@ function checkLogin() {
 }
 
 function logout() {
-  return { type: authenticationConstants.LOGOUT };
+  return (dispatch) => {
+    dispatch({ type: authenticationConstants.LOGOUT });
+
+    authenticationService.redirectToLogout();
+  };
 }

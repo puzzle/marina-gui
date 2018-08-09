@@ -1,31 +1,13 @@
-#header div {
-  display: grid;
-  grid-template-columns: auto 100px;
-  grid-template-rows: 40px auto;
-  /* @formatter:off */
-  grid-template-areas:
-    "title language"
-    "title .";
-  /* @formatter:on */
+header .navbar .navbar-user {
+  padding-top: 3px;
 }
 
-@media only screen and (max-width: 600px) {
-  #header div {
-    grid-template-columns: auto;
-    grid-template-rows: auto auto;
-    /* @formatter:off */
-    grid-template-areas:
-      "title"
-      "language";
-    /* @formatter:on */
-  }
-}
-
-#header div h1 {
-  grid-area: title;
-  color: blue;
-}
-
-#header div select {
-  grid-area: language;
+header .navbar li button.link {
+  line-height: 20px;
+  position: relative;
+  display: block;
+  padding: 15px 15px;
+  color: #999;
+  background: transparent;
+  border: none;
 }

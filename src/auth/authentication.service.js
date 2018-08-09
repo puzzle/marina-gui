@@ -1,8 +1,9 @@
-import { url, handleResponse, makeRequestOptions } from '../common/service.helper';
+import { handleResponse, makeRequestOptions, url } from '../common/service.helper';
 
 export const authenticationService = {
   getUser,
   redirectToLogin,
+  redirectToLogout,
 };
 
 function getUser() {
@@ -20,6 +21,11 @@ function getUser() {
 
 function redirectToLogin() {
   redirectTo(url('/sso'));
+}
+
+function redirectToLogout() {
+  localStorage.removeItem('user');
+  redirectTo(url('/ssoLogout'));
 }
 
 function redirectTo(newUrl) {

@@ -12,7 +12,6 @@ export function userEmployee(state = initialState, action) {
 
     // empty states
     case employeeConstants.CHECK_EMPLOYEE_REQUEST:
-    case employeeConstants.CHECK_EMPLOYEE_FAILURE:
       return {};
 
     default:
