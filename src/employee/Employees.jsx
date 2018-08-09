@@ -31,7 +31,13 @@ class Employees extends React.Component {
     return (
       <div>
         <h1>{translate('navigation.employees')}</h1>
-        <ReactTable data={data} columns={columns} minRows={0} defaultSorted={defaultSorted} />
+        <ReactTable
+          data={data}
+          columns={columns}
+          minRows={0}
+          defaultSorted={defaultSorted}
+          showPagination={false}
+        />
         <ButtonToolbar style={{ marginTop: '20px' }}>
           <Link to="/employee/new">
             <Button>

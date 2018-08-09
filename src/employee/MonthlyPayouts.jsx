@@ -21,6 +21,7 @@ class MonthlyPayouts extends React.Component {
         columns={columns}
         minRows={0}
         defaultSorted={defaultSorted}
+        showPagination={false}
       />
     );
   }
