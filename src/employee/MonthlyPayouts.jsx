@@ -22,7 +22,7 @@ class MonthlyPayouts extends React.Component {
         minRows={0}
         defaultSorted={defaultSorted}
         showPagination={false}
-        defaultPageSize={999}
+        defaultPageSize={-1}
       />
     );
   }
