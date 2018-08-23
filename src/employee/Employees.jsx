@@ -37,7 +37,7 @@ class Employees extends React.Component {
           minRows={0}
           defaultSorted={defaultSorted}
           showPagination={false}
-          defaultPageSize={-1}
+          defaultPageSize={999}
         />
         <ButtonToolbar style={{ marginTop: '20px' }}>
           <Link to="/employee/new">
