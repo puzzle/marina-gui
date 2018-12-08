@@ -1,0 +1,93 @@
+{
+  "app": {
+    "title": "Marina",
+    "redirectLogin": "Cargando...",
+    "download": "descargar",
+    "total": "Total",
+    "avg": "Promedio",
+    "logout": "Cerrar sesión (SSO)"
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "welcome": "Bienvenid@ a la aplicación Marina, ${firstName} ${lastName}"
+  },
+  "navigation": {
+    "dashboard": "Panel de Control",
+    "userSettings": "Configuracón de usarios",
+    "logout": "Cerrar sesión",
+    "employees": "Colaborador",
+    "payment": "Pago"
+  },
+  "employee": {
+    "editCreateEmployee": "Crear/adaptar colaborador",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "username": "Nombre de usario",
+    "email": "Correo electrónico",
+    "agreement": {
+      "text": "Acuerdo",
+      "current": "Acuerdo actual",
+      "true": "OK",
+      "false": "Aún no subido"
+    },
+    "currentConfiguration": {
+      "percentage": "Porcentaje del salario bruto mensual",
+      "zeroPercent": "0% (nada en Bitcoin)",
+      "address": "Dirección Bitcoin del beneficiario",
+      "amountChf": "Cantidad en Bitcoin",
+      "isLocked": "¡No puedes cambiar esta configuración todos los meses del día 11 al 25!"
+    },
+    "agreementFile": "Subir nuevo acuerdo",
+    "addManually": "Añadir manualmente",
+    "bruttoSalary": "Salario bruto mensual",
+    "save": "Guardar",
+    "upload": "Subir",
+    "payouts": "Pagos"
+  },
+  "payment": {
+    "title": "Pago",
+    "privateKey": "Clave privada (WIF)",
+    "exchangeRate": "Tipo de cambio (CHF por Bitcoin)",
+    "send": "Enviar transacción a la red",
+    "mempoolStatistics": "Estadística del Mempool",
+    "feeRate": "Tarifa de transacción. Utilización actual de la red: ",
+    "feeRates": {
+      "0.5": "0.5 satoshi/Byte (muy barato)",
+      "1": "1 satoshi/Byte (defecto)",
+      "2": "2 satoshi/Byte",
+      "3": "3 satoshi/Byte",
+      "5": "5 satoshi/Byte",
+      "10": "10 satoshi/Byte (poco caro, utilización elevada)",
+      "20": "20 satoshi/Byte",
+      "30": "30 satoshi/Byte",
+      "50": "50 satoshi/Byte",
+      "100": "100 satoshi/Byte (caro, alta utilización)",
+      "200": "200 satoshi/Byte",
+      "300": "300 satoshi/Byte",
+      "500": "500 satoshi/Byte (muy caro, utilización máxima)"
+    },
+    "changeAddress": "Dirección para suma restante",
+    "pay": "Pagar",
+    "recipients": "Beneficiario",
+    "balance": "Saldo",
+    "confirmations": "Confirmaciónes",
+    "paymentSatoshis": "Pago en Satoshi",
+    "summary": "Resumen",
+    "inputs": "Inputs (Entradas)",
+    "outputs": "Outputs (Salidas)",
+    "fee": "Tarifa",
+    "txSize": "Tamaño de la transación",
+    "txId": "Identificación",
+    "success": "La transacción fue enviada exitosamente."
+  },
+  "payout": {
+    "date": "Fecha del pago",
+    "address": "Para dirección",
+    "rateChf": "Tipo de cambio (CHF por Bitcoin)",
+    "amountChf": "Cantidad de CHF",
+    "amountBtc": "Cantidad de BTC"
+  },
+  "save": {
+    "success": "Guardado exitosamente"
+  }
+}
