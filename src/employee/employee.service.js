@@ -16,6 +16,8 @@ export const employeeService = {
   uploadFile,
   getAgreementUrl,
   savePayouts,
+  getEmployeePayoutSummaryUrl,
+  getAllPayoutSummariesUrl,
 };
 
 function getEmployee(id) {
@@ -65,6 +67,14 @@ function getAgreementUrl(employeeId) {
     return url('/employees/user/agreement');
   }
   return url(`/employees/${employeeId}/agreement`);
+}
+
+function getEmployeePayoutSummaryUrl(lang, employeeId, year) {
+  return url(`/employees/${employeeId}/payouts/pdf/${year}?lang=${lang}`);
+}
+
+function getAllPayoutSummariesUrl(lang, year) {
+  return url(`/employees/payouts/pdf/${year}?lang=${lang}`);
 }
 
 function savePayouts(payouts) {

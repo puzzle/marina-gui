@@ -42,7 +42,9 @@
     "bruttoSalary": "Brutto-Monatslohn",
     "save": "Speichern",
     "upload": "Hochladen",
-    "payouts": "Auszahlungen"
+    "payouts": "Auszahlungen",
+    "payoutSummaryForYears": "Auszahlungs-Report herunterladen für das Jahr:",
+    "payoutSummaryForAllEmployeesForYears": "Auszahlungs-Report für alle Mitarbeiter herunterladen für das Jahr:"
   },
   "payment": {
     "title": "Auszahlung",

@@ -1,29 +1,37 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import { connect } from 'react-redux';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { formatCurrency } from '../common/number.helper';
+import { employeeService } from './employee.service';
+import { formatCurrency, uniqueOnly } from '../common/number.helper';
 import { getExplorerAddrUrl, SATOSHIS_IN_BTC } from '../common/bitcoin.helper';
 
 class MonthlyPayouts extends React.Component {
   render() {
-    const { translate, monthlyPayouts } = this.props;
+    const { translate, monthlyPayouts, employeeId, currentLanguage } = this.props;
 
     const data = monthlyPayouts || [];
     const columns = getColumnDefinitions(translate);
     const defaultSorted = [{ id: 'paymentDate', desc: true }];
+    const years = data.map(payout => payout.year).filter(uniqueOnly);
 
     return (
-      <ReactTable
-        data={data}
-        columns={columns}
-        minRows={0}
-        defaultSorted={defaultSorted}
-        showPagination={false}
-        defaultPageSize={999}
-      />
+      <div>
+        <ReactTable
+          data={data}
+          columns={columns}
+          minRows={0}
+          defaultSorted={defaultSorted}
+          showPagination={false}
+          defaultPageSize={999}
+        />
+        <br /><br />
+        {translate('employee.payoutSummaryForYears')}
+        <span>&nbsp;</span>
+        {years.map(year => (<a href={employeeService.getEmployeePayoutSummaryUrl(currentLanguage, employeeId, year)}>{year} </a>))}
+      </div>
     );
   }
 }
@@ -78,6 +86,7 @@ function getColumnDefinitions(translate) {
 function mapStateToProps(state) {
   return {
     translate: getTranslate(state.locale),
+    currentLanguage: getActiveLanguage(state.locale).code,
   };
 }
 

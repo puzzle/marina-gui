@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
         {userEmployee && userEmployee.monthlyPayouts && userEmployee.monthlyPayouts.length > 0 &&
         <div>
           <h3>{translate('employee.payouts')}</h3>
-          <MonthlyPayouts monthlyPayouts={userEmployee.monthlyPayouts} />
+          <MonthlyPayouts monthlyPayouts={userEmployee.monthlyPayouts} employeeId={userEmployee.id} />
         </div>
         }
       </div>

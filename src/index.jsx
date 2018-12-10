@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { addTranslationForLanguage, initialize } from 'react-localize-redux';
 
-import 'bootstrap/fonts/glyphicons-halflings-regular.eot';
 import './common/stylesheets/styles.css';
 
 import { App, store } from './app';

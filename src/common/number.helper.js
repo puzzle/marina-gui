@@ -31,3 +31,7 @@ export function calculateAmount(fullSalary, selectedPercentage) {
   }
   return round5Cents((fullSalary / 100) * selectedPercentage);
 }
+
+export function uniqueOnly(value, index, self) {
+  return self.indexOf(value) === index;
+}

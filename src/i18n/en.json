@@ -42,7 +42,9 @@
     "bruttoSalary": "Monthly gross salary",
     "save": "Save",
     "upload": "Upload",
-    "payouts": "Payouts"
+    "payouts": "Payouts",
+    "payoutSummaryForYears": "Download payout report for year:",
+    "payoutSummaryForAllEmployeesForYears": "Download payout report for all employees for year:"
   },
   "payment": {
     "title": "Payment",

@@ -2,14 +2,14 @@ import React from 'react';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faBan from '@fortawesome/fontawesome-free-solid/faBan';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import * as _ from 'lodash';
 import { employeeActions } from './employee.actions';
-import { formatCurrency } from '../common/number.helper';
+import { formatCurrency, uniqueOnly } from '../common/number.helper';
 import { employeeService } from './index';
 import { getExplorerAddrUrl } from '../common/bitcoin.helper';
 
@@ -22,11 +22,14 @@ class Employees extends React.Component {
   }
 
   render() {
-    const { translate, employees } = this.props;
+    const { translate, employees, currentLanguage } = this.props;
 
     const data = employees || [];
     const columns = getColumnDefinitions(translate);
     const defaultSorted = [{ id: 'lastName', desc: false }];
+    const years = _.flatMap(employees, 'monthlyPayouts')
+      .map(payout => payout.year)
+      .filter(uniqueOnly);
 
     return (
       <div>
@@ -46,6 +49,10 @@ class Employees extends React.Component {
             </Button>
           </Link>
         </ButtonToolbar>
+        <br /><br />
+        {translate('employee.payoutSummaryForAllEmployeesForYears')}
+        <span>&nbsp;</span>
+        {years.map(year => (<a href={employeeService.getAllPayoutSummariesUrl(currentLanguage, year)}>{year} </a>))}
       </div>
     );
   }
@@ -116,6 +123,7 @@ function mapStateToProps(state) {
     user,
     employees,
     translate: getTranslate(state.locale),
+    currentLanguage: getActiveLanguage(state.locale).code,
   };
 }
 
