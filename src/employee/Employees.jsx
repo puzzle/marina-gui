@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import { getActiveLanguage, getTranslate } from 'react-localize-redux';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle';
 import faBan from '@fortawesome/fontawesome-free-solid/faBan';
@@ -72,6 +72,9 @@ function getColumnDefinitions(translate) {
   }, {
     Header: translate('employee.email'),
     accessor: 'email',
+  }, {
+    Header: translate('employee.socialSecurityNumber'),
+    accessor: 'socialSecurityNumber',
   }, {
     Header: translate('employee.agreement.text'),
     accessor: 'agreement',

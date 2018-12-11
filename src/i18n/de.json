@@ -23,6 +23,7 @@
     "firstName": "Vorname",
     "lastName": "Nachname",
     "username": "Username",
+    "socialSecurityNumber": "AHV-Nummer",
     "email": "E-Mail-Adresse",
     "agreement": {
       "text": "Vereinbarung",

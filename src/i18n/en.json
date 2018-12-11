@@ -23,6 +23,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "username": "Username",
+    "socialSecurityNumber": "AHV number",
     "email": "E-mail address",
     "agreement": {
       "text": "Agreement",

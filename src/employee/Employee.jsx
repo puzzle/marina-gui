@@ -27,6 +27,7 @@ class Employee extends React.Component {
       lastName: '',
       email: '',
       username: '',
+      socialSecurityNumber: '',
       bruttoSalary: 0,
       agreementFile: '',
       validation: {
@@ -59,6 +60,7 @@ class Employee extends React.Component {
         lastName: employee.lastName,
         email: employee.email,
         username: employee.username,
+        socialSecurityNumber: employee.socialSecurityNumber,
         bruttoSalary: employee.bruttoSalary || 0,
         validation,
       });
@@ -104,7 +106,7 @@ class Employee extends React.Component {
         <Row>
           <Col md={4}>
             <form onSubmit={this.handleSubmit}>
-              {['firstName', 'lastName', 'username', 'email'].map((ctrl => (
+              {['firstName', 'lastName', 'username', 'email', 'socialSecurityNumber'].map((ctrl => (
                 <FormGroup
                   controlId={ctrl}
                   validationState={this.getValidationState(ctrl)}
