@@ -7,8 +7,8 @@ import {
 } from 'bitcoinjs-lib';
 import { handleResponse, handleResponseText } from './service.helper';
 
-export const MAINNET_EXPLORER_URL = 'https://btc.com';
-export const TESTNET_EXPLORER_URL = 'https://tchain.btc.com';
+export const MAINNET_EXPLORER_URL = 'https://blockstream.info';
+export const TESTNET_EXPLORER_URL = 'https://blockstream.info/testnet';
 export const MAINNET_API_URL = 'https://blockexplorer.com/api';
 export const TESTNET_API_URL = 'https://testnet.blockexplorer.com/api';
 export const MAINNET_PUSH_URL = 'https://blockchain.info';
@@ -177,11 +177,11 @@ export function getUtxosForAddress(addresses) {
 }
 
 export function getExplorerTxUrl(tx) {
-  return `${getExplorerUrl()}/${tx}`;
+  return `${getExplorerUrl()}/tx/${tx}`;
 }
 
 export function getExplorerAddrUrl(addr) {
-  return `${getExplorerUrl()}/${addr}`;
+  return `${getExplorerUrl()}/address/${addr}`;
 }
 
 export function publishTx(tx) {
