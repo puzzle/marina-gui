@@ -69,11 +69,11 @@
       "300": "300 satoshi/Byte",
       "500": "500 satoshi/Byte (sehr teuer, maximale Auslastung)"
     },
-    "changeAddress": "Adresse für Restbetrag",
+    "changeAddress": "Adresse für Restbetrag (Wechselgeld)",
     "pay": "Auszahlen",
     "recipients": "Empfänger",
     "balance": "Guthaben",
-    "confirmations": "Bestätigungen",
+    "confirmed": "bestätigt",
     "paymentSatoshis": "Auszahlungsbetrag in Satoshis",
     "summary": "Zusammenfassung",
     "inputs": "Inputs",
@@ -81,7 +81,8 @@
     "fee": "Gebühr",
     "txSize": "Tx-Grösse",
     "txId": "Tx-ID",
-    "success": "Die Transaktion wurde erfolgreich übermittelt!"
+    "success": "Die Transaktion wurde erfolgreich übermittelt!",
+    "changeOutput": "Restbetrag (Wechselgeld)"
   },
   "payout": {
     "date": "Auszahlungsdatum",

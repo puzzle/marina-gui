@@ -69,11 +69,11 @@
       "300": "300 satoshi/Byte",
       "500": "500 satoshi/Byte (very expensive, maximum traffic)"
     },
-    "changeAddress": "Address for remaining amount",
+    "changeAddress": "Address for remaining amount (change output)",
     "pay": "Pay",
     "recipients": "Recipients",
     "balance": "Balance",
-    "confirmations": "Confirmations",
+    "confirmed": "Confirmed",
     "paymentSatoshis": "Payment in Satoshis",
     "summary": "Summary",
     "inputs": "Inputs",
@@ -81,7 +81,8 @@
     "fee": "Fee",
     "txSize": "Tx size",
     "txId": "Tx ID",
-    "success": "Die Transaktion wurde erfolgreich übermittelt!"
+    "success": "Die Transaktion wurde erfolgreich übermittelt!",
+    "changeOutput": "Remaining amount (change output)"
   },
   "payout": {
     "date": "Payout date",

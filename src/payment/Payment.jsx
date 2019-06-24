@@ -93,11 +93,15 @@ class Payment extends React.Component {
       privateKeyValid = bitcoinPrivateKeyValid(value);
       if (privateKeyValid) {
         const addrs = getAddressesFromPrivKey(value);
-        getUtxosForAddress(addrs).then((utxoSetNew) => {
-          utxoSetNew.forEach((utxo) => {
-            if (utxo.confirmations > 0) {
-              utxo.selected = true;
-            }
+        getUtxosForAddress(addrs).then((responses) => {
+          const utxoSetNew = [];
+          responses.forEach((response) => {
+            response.forEach((utxo) => {
+              if (utxo.status && utxo.status.confirmed) {
+                utxo.selected = true;
+                utxoSetNew.push(utxo);
+              }
+            });
           });
           const newState = Object.assign({}, this.state, {
             utxoSet: utxoSetNew,
@@ -254,11 +258,10 @@ class Payment extends React.Component {
                   </small>
                   <br />
                   {translate('payment.balance')}:&nbsp;
-                  {formatNumber(utxo.satoshis)} sat
-                  / {utxo.satoshis / SATOSHIS_IN_BTC} BTC
+                  {formatNumber(utxo.value)} sat
+                  / {utxo.value / SATOSHIS_IN_BTC} BTC
                   <br />
-                  {translate('payment.confirmations')}:&nbsp;
-                  {utxo.confirmations}
+                  {translate('payment.confirmed')}:&nbsp;&#10004;
                 </li>
               ))}
             </ul>
@@ -323,6 +326,12 @@ class Payment extends React.Component {
                   <th>{translate('payment.outputs')} ({this.state.tx.numOutputs})</th>
                   <td align="right">
                     {formatNumber(this.state.tx.outputSum)} sat
+                  </td>
+                </tr>
+                <tr>
+                  <th>{translate('payment.changeOutput')}</th>
+                  <td align="right">
+                    {formatNumber(this.state.tx.change)} sat
                   </td>
                 </tr>
                 <tr>

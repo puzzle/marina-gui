@@ -1,16 +1,10 @@
-import {
-  address as bitcoinAddress,
-  crypto,
-  ECPair,
-  networks,
-  script as bitcoinScript,
-} from 'bitcoinjs-lib';
+import { address as bitcoinAddress, crypto, ECPair, networks, script as bitcoinScript } from 'bitcoinjs-lib';
 import { handleResponse, handleResponseText } from './service.helper';
 
 export const MAINNET_EXPLORER_URL = 'https://blockstream.info';
 export const TESTNET_EXPLORER_URL = 'https://blockstream.info/testnet';
-export const MAINNET_API_URL = 'https://blockexplorer.com/api';
-export const TESTNET_API_URL = 'https://testnet.blockexplorer.com/api';
+export const MAINNET_API_URL = 'https://blockstream.info/api/';
+export const TESTNET_API_URL = 'https://blockstream.info/testnet/api/';
 export const MAINNET_PUSH_URL = 'https://blockchain.info';
 export const TESTNET_PUSH_URL = 'https://testnet.blockchain.info';
 
@@ -172,8 +166,17 @@ function makeRequestOptionsApi(method, obj = {}) {
 }
 
 export function getUtxosForAddress(addresses) {
-  return fetch(`${getApiUrl()}/addrs/${addresses.join(',')}/utxo?noCache=1`, makeRequestOptionsApi('GET'))
-    .then(handleResponse);
+  const promises = [];
+  addresses.forEach((address) => {
+    const promise = fetch(`${getApiUrl()}/address/${address}/utxo`, makeRequestOptionsApi('GET'))
+      .then(handleResponse)
+      .then((utxos) => {
+        utxos.forEach(u => (u.address = address));
+        return utxos;
+      });
+    promises.push(promise);
+  });
+  return Promise.all(promises);
 }
 
 export function getExplorerTxUrl(tx) {

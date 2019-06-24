@@ -54,7 +54,7 @@ export function buildTx(state, utxoSet, employees) {
   // create inputs
   const inputs = filteredUtxo.map(utxo => ({
     address: utxo.address,
-    sats: utxo.satoshis,
+    sats: utxo.value,
     txid: utxo.txid,
     vout: utxo.vout,
   }));
@@ -75,20 +75,21 @@ export function buildTx(state, utxoSet, employees) {
     return null;
   }
   const spareAmount = inputSum - outputSum;
-  const decorateTx = (tx, fee, feeRate) => {
+  const decorateTx = (tx, fee, feeRate, changeOutput) => {
     tx.numInputs = inputs.length;
     tx.inputSum = inputSum;
     tx.numOutputs = outputs.length;
     tx.outputSum = outputSum;
     tx.fee = fee;
     tx.feeRate = feeRate;
+    tx.change = (changeOutput !== null) ? changeOutput.sats : 0;
     return tx;
   };
 
   // first try, no change address
   let tx = _buildTx(inputs, outputs, keyPair);
   if (tx !== null && feeRateOk(spareAmount, tx.byteLength(), state.feeRate)) {
-    return decorateTx(tx, spareAmount, getFeeRate(spareAmount, tx.byteLength()));
+    return decorateTx(tx, spareAmount, getFeeRate(spareAmount, tx.byteLength()), null);
   }
 
   // now add a change address and adjust fee until we're in the target zone
@@ -105,7 +106,7 @@ export function buildTx(state, utxoSet, employees) {
 
     // if we land on the fee we want, great
     if (feeRateOk(currentFee, tx.byteLength(), state.feeRate)) {
-      return decorateTx(tx, currentFee, getFeeRate(currentFee, tx.byteLength()));
+      return decorateTx(tx, currentFee, getFeeRate(currentFee, tx.byteLength()), changeOutput);
     }
 
     // if not, adjust the fee and try again

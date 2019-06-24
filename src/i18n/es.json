@@ -67,11 +67,11 @@
       "300": "300 satoshi/Byte",
       "500": "500 satoshi/Byte (muy caro, utilización máxima)"
     },
-    "changeAddress": "Dirección para suma restante",
+    "changeAddress": "Dirección para suma restante (combio)",
     "pay": "Pagar",
     "recipients": "Beneficiario",
     "balance": "Saldo",
-    "confirmations": "Confirmaciónes",
+    "confirmed": "Confirmativo",
     "paymentSatoshis": "Pago en Satoshi",
     "summary": "Resumen",
     "inputs": "Inputs (Entradas)",
@@ -79,7 +79,8 @@
     "fee": "Tarifa",
     "txSize": "Tamaño de la transación",
     "txId": "Identificación",
-    "success": "La transacción fue enviada exitosamente."
+    "success": "La transacción fue enviada exitosamente.",
+    "changeOutput": "Suma restante (combio)"
   },
   "payout": {
     "date": "Fecha del pago",
