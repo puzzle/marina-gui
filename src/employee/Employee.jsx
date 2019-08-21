@@ -33,6 +33,7 @@ class Employee extends React.Component {
       validation: {
         bruttoSalary: 'error',
       },
+      status: 'ACTIVE',
     };
 
     const { dispatch, match } = this.props;
@@ -62,6 +63,7 @@ class Employee extends React.Component {
         username: employee.username,
         socialSecurityNumber: employee.socialSecurityNumber,
         bruttoSalary: employee.bruttoSalary || 0,
+        status: employee.status,
         validation,
       });
     }

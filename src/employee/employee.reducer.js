@@ -43,6 +43,7 @@ export function employee(state = initialState, action) {
     case employeeConstants.SAVE_EMPLOYEE_SUCCESS:
     case employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS:
     case employeeConstants.GET_EMPLOYEE_SUCCESS:
+    case employeeConstants.UPDATE_STATUS_SUCCESS:
       return {
         employee: action.employee,
       };
@@ -54,6 +55,8 @@ export function employee(state = initialState, action) {
     case employeeConstants.SAVE_EMPLOYEE_FAILURE:
     case employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_REQUEST:
     case employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_FAILURE:
+    case employeeConstants.UPDATE_STATUS_REQUEST:
+    case employeeConstants.UPDATE_STATUS_FAILURE:
       return {};
 
     default:

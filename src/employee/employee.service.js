@@ -1,7 +1,7 @@
 import {
   fetchCreatedEntity,
   handleResponse,
-  makeMultipart,
+  makeMultipart, makeRaw,
   makeRequestOptions,
   url,
 } from '../common/service.helper';
@@ -18,6 +18,7 @@ export const employeeService = {
   savePayouts,
   getEmployeePayoutSummaryUrl,
   getAllPayoutSummariesUrl,
+  updateStatus,
 };
 
 function getEmployee(id) {
@@ -79,5 +80,10 @@ function getAllPayoutSummariesUrl(lang, year) {
 
 function savePayouts(payouts) {
   return fetch(url('/employees/payouts'), makeRequestOptions('POST', { body: JSON.stringify(payouts) }))
+    .then(handleResponse);
+}
+
+function updateStatus(employeeId, status) {
+  return fetch(url(`/employees/${employeeId}/status`), makeRaw('PUT', status))
     .then(handleResponse);
 }

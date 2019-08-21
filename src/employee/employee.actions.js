@@ -23,6 +23,10 @@ export const employeeConstants = {
   UPLOAD_EMPLOYEE_AGREEMENT_REQUEST: 'UPLOAD_EMPLOYEE_AGREEMENT_REQUEST',
   UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS: 'UPLOAD_EMPLOYEE_AGREEMENT_SUCCESS',
   UPLOAD_EMPLOYEE_AGREEMENT_FAILURE: 'UPLOAD_EMPLOYEE_AGREEMENT_FAILURE',
+
+  UPDATE_STATUS_REQUEST: 'UPDATE_STATUS_REQUEST',
+  UPDATE_STATUS_SUCCESS: 'UPDATE_STATUS_SUCCESS',
+  UPDATE_STATUS_FAILURE: 'UPDATE_STATUS_FAILURE',
 };
 
 export const employeeActions = {
@@ -31,6 +35,7 @@ export const employeeActions = {
   getEmployee,
   saveEmployee,
   uploadFile,
+  updateStatus,
 };
 
 function checkEmployee() {
@@ -186,4 +191,31 @@ function uploadFile(employeeId, file) {
   function failure(error) {
     return { type: employeeConstants.UPLOAD_EMPLOYEE_AGREEMENT_FAILURE, error };
   }
+}
+
+function updateStatus(employeeId, status) {
+  return (dispatch) => {
+    dispatch(request());
+
+    employeeService.updateStatus(employeeId, status)
+      .then(
+        () => {
+          dispatch(success());
+          dispatch(getEmployees());
+        },
+        error => dispatch(failure(error)),
+      );
+
+    function request() {
+      return { type: employeeConstants.UPDATE_STATUS_REQUEST };
+    }
+
+    function success() {
+      return { type: employeeConstants.UPDATE_STATUS_SUCCESS };
+    }
+
+    function failure(error) {
+      return { type: employeeConstants.UPDATE_STATUS_FAILURE, error };
+    }
+  };
 }

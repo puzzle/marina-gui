@@ -69,6 +69,16 @@ export function makeMultipart(method, params = {}) {
   };
 }
 
+export function makeRaw(method, rawBody) {
+  return {
+    method,
+    body: rawBody,
+    credentials: 'include',
+    mode: 'cors',
+    redirect: 'follow',
+  };
+}
+
 export const url = path => `${process.env.REACT_APP_BACKEND_URL}${path}${process.env.REACT_APP_BACKEND_SUFFIX}`;
 
 export function getValueFromInputChangeEvent(event) {

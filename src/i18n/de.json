@@ -45,7 +45,18 @@
     "upload": "Hochladen",
     "payouts": "Auszahlungen",
     "payoutSummaryForYears": "Auszahlungs-Report herunterladen für das Jahr:",
-    "payoutSummaryForAllEmployeesForYears": "Auszahlungs-Report für alle Mitarbeiter herunterladen für das Jahr:"
+    "payoutSummaryForAllEmployeesForYears": "Auszahlungs-Report für alle Mitarbeiter herunterladen für das Jahr:",
+    "status": {
+      "filter": "Mitarbeiter nach Status filtern:",
+      "label": "Status",
+      "ACTIVE": "Aktiv",
+      "DISABLED": "Unterbrochen",
+      "LEFT_COMPANY": "Ausgetreten"
+    },
+    "actions": "Aktionen",
+    "disable": "Unterbruch",
+    "leftCompany": "Austritt",
+    "enable": "aktivieren"
   },
   "payment": {
     "title": "Auszahlung",

@@ -55,6 +55,7 @@ class Payment extends React.Component {
     }
     employees = employees
       .filter(emp => emp && emp.agreement && emp.currentConfiguration && emp.currentConfiguration.amountChf > 0)
+      .filter(emp => emp && emp.status === 'ACTIVE')
       .map(e => ({
         selected: true,
         ...e,

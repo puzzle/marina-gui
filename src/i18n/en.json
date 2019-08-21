@@ -45,7 +45,18 @@
     "upload": "Upload",
     "payouts": "Payouts",
     "payoutSummaryForYears": "Download payout report for year:",
-    "payoutSummaryForAllEmployeesForYears": "Download payout report for all employees for year:"
+    "payoutSummaryForAllEmployeesForYears": "Download payout report for all employees for year:",
+    "status": {
+      "filter": "Filter employees by status:",
+      "label": "Status",
+      "ACTIVE": "Active",
+      "DISABLED": "Disabled",
+      "LEFT_COMPANY": "Left company"
+    },
+    "actions": "Actions",
+    "disable": "disable",
+    "leftCompany": "left company",
+    "enable": "enable"
   },
   "payment": {
     "title": "Payment",
