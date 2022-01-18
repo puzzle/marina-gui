@@ -29,3 +29,15 @@ If the employees received their money, but the salary payment doesn't show up wi
 2) Enter the command `walletpassphrase <your_password> 120`.
 3) Enter the command `dumpprivkey <Bitcoin Address that contains the money>` 
 4) The output you see is the private key. **Caution! Anyone who knows this key can spend/steal the Bitcoin on the corresponding address!**
+
+### Manually change monthly paymount amount, after settings are locked for user
+First, here are some information that should help you understand what you're dealing with:
+* The percentage is not being saved anywhere in the database. Instead, the nominal amount that shall be paid out as the Bitcoin salary is stored in the table `current_configuration`.
+* When the admin changes a salary within the locking period, the payment amount is being set to 0. [This is bad](https://github.com/puzzle/marina-backend/issues/14). Given the point mentioned before, this also makes it impossible for you to find out what percentage the user wanted initially. You'll have to figure that out by looking at the users history, or even better, by asking him what setting he'd like to have.
+
+##### Step-by-step guide
+1) Get onto the database machine/pod . Run `psql` to switch into a Postgres context and then `\c marina` to connect to the right database.
+2) Search for the employee you want to change: `SELECT * FROM employee;` -> write down `id` and `brutto_salary`;
+3) Calculate what nominal amount you want the user to receive for this month using the `brutto_salary` and the percentage you found out the user wants to receive in Bitcoin. For example: `316.35`
+4) Write the result into the table `current_configuration`: `UPDATE current_configuration SET amount_chf = <nominal value in USD/EUR/CHF> WHERE employee_id = <employee id>;`
+5) In the Marina GUI look at the page `Payment` and check that everything is as expected.
