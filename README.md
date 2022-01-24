@@ -21,6 +21,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### No outputs shown
 Sometimes the output that the CFO wants to spend doesn't show up after adding the private key to the Marina App. This is most likely an issue with the API, where Marina pulls the data from (3rd party service). Maybe just try again a couple of hours later.
 
+### Outputs shown but no possibilty to send payment
+Once you selected the output you want to spend and completed the form (Private key, Exchange rate, change address, Transaction fee) you should see a summary and a possibility to execute the payment at the bottom of the page.
+
+If this doesn't show up, you've likely made a mistake with the exchange rate.  
+Consider this: The payment may only be crafted if there is enough Bitcoin on the output, to fulfill all salaries. If you set too low of an exchange rate, there won't be enough Bitcoin on your output to pay all employes. Make sure that you take the same exchange rate, your own purchase was subject to.
+
+
 ### Salary sent but not visible in the Marina App
 If the employees received their money, but the salary payment doesn't show up within the Marina App, have a look at [this issue](https://github.com/puzzle/marina-backend/issues/12).
 
