@@ -139,7 +139,7 @@ export function naiveTxSizeEstimation(numInputs, numOutputs) {
 }
 
 export function isProd() {
-  return window.location.hostname === 'marina.puzzle.ch';
+  return process.env.REACT_APP_STAGE === 'prod';
 }
 
 export function getApiUrl() {
